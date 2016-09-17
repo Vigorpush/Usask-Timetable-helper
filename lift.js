@@ -28,4 +28,3 @@
     timeTable.className = tableStyle;
 
 })();
-//added
