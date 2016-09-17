@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  A bit of Javascript for enhancing the LAF of the timetable page on the usask website
-// @author       You
+// @author       Zang JiaWei, Nobleman Chukwu, Bengin Lee
 // @match        https://pawnss.usask.ca/ban/*
 // @grant        none
 // ==/UserScript==
