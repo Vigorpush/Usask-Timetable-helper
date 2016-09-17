@@ -26,5 +26,4 @@
     var tableStyle = 'table table-striped table-bordered table-condensed table-responsive';
     var timeTable = document.querySelector('.datadisplaytable');
     timeTable.className = tableStyle;
-
 })();
