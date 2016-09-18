@@ -12,31 +12,25 @@
 //global values
 var maincolor = "#2c8fe4";
 
-//Start of testing jQuery
-alert('jQuery Work!');
-
-var runEverySecond = function(){
-  $('p').find('img').attr('width', '0px');
-  $('a').css('padding', '0px');
-
-  console.debug('Hello Word has ' + $('p').length + ' paragraphs');
-};
-
 $(document).ready(function() {
-	/*
-    so far those are not working by somereason
+	
+	
+    /*
+     * Creating the share button 
+     * 
+     * Make the Button shows up
+     * Add functions for testing
+     * Add share functionality works
 	 */
-	//Adding Share Button
+	//TODO
 	var newEm = document.createElement("span");
 	newEm.innerHTML= "share";
 	newEm.id = "share_button";
 	newEm.addEventListener('click', ShareAction, true);//callback the ShareAction function
 	addStyle("#share_button{margin:9px 0 0 0; background:black; left:20px;}");
 	alert("test");
-	//
-    setInterval(runEverySecond,1000);
+
 });
-//End of testing jQuery
 
 (function() {
 	'use strict';
@@ -63,9 +57,13 @@ $(document).ready(function() {
 
 })();
 
-	//Added CSS style
+	//TODO
+	/*
+	 * Add CSS into this variable
+	 */
 	var newCSS = "";
 	newCSS += "";
+	
 	
 	function addStyle(css){
 		document.head.appendChild(document.createElement("style")).textContent = css;
