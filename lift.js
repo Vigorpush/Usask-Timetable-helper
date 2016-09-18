@@ -11,6 +11,13 @@
 
 //global values
 var maincolor = "#2c8fe4";
+//TODO
+/*
+ * Add CSS into this variable
+ */
+var newCSS = "";
+newCSS += "";
+
 
 $(document).ready(function() {
 	
@@ -28,7 +35,7 @@ $(document).ready(function() {
 	newEm.id = "share_button";
 	newEm.addEventListener('click', ShareAction, true);//callback the ShareAction function
 	addStyle("#share_button{margin:9px 0 0 0; background:black; left:20px;}");
-	alert("test");
+	alert("test");//this code will check the button creating function is processed or not, feel free to delete.
 
 });
 
@@ -40,7 +47,7 @@ $(document).ready(function() {
 	lnk.href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
 	document.head.appendChild(lnk);
 	document.body.style.background = maincolor;
-	//document.getElementByTag("A:link").style.color ="magenta";//change the font color in calender
+	//document.getElementByTag("A:link").style.color ="magenta";//change the font color in calender, which is not working
 	document.querySelector(".pagebodydiv > div.infotextdiv").style.display = "none";
 	var search = document.querySelector('.pagebodydiv > form:nth-child(2) > table:nth-child(1)');
 	if (search) {
@@ -52,23 +59,14 @@ $(document).ready(function() {
 	var timeTable = document.querySelector('.datadisplaytable');
 	timeTable.className = tableStyle;
 
-	
-
-
 })();
 
-	//TODO
 	/*
-	 * Add CSS into this variable
-	 */
-	var newCSS = "";
-	newCSS += "";
-	
-	
+	 * adding style into head
+	 * */
 	function addStyle(css){
 		document.head.appendChild(document.createElement("style")).textContent = css;
 	}
-	
 	addStyle(newCSS);
 	
 	//Function Share function Caller
