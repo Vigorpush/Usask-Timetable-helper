@@ -5,14 +5,31 @@
 //@description  A bit of Javascript for enhancing the LAF of the timetable page on the usask website
 //@author       Zang JiaWei, Nobleman Chukwu, Bengin Lee
 //@match        https://pawnss.usask.ca/ban/*
+//@require   	http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 //@grant        none
 //==/UserScript==
 
+//global values
 var maincolor = "#2c8fe4";
+
+//Start of testing jQuery
+alert('jQuery Work!');
+
+var runEverySecond = function(){
+  $('p').find('img').attr('width', '0px');
+  $('a').css('padding', '0px');
+
+  console.debug('Hello Word has ' + $('p').length + ' paragraphs');
+};
+
+$(document).ready(function() {
+    setInterval(runEverySecond,1000);
+});
+//End of testing jQuery
 
 (function() {
 	'use strict';
-
+	
 	var lnk = document.createElement('link');
 	lnk.rel = "stylesheet";
 	lnk.href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
@@ -43,8 +60,6 @@ var maincolor = "#2c8fe4";
 
 
 })();
-
-
 
 	//Added CSS style
 	var newCSS = "";
