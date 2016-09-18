@@ -8,6 +8,8 @@
 // @grant        none
 // ==/UserScript==
 
+var maincolor = "#2c8fe4";
+
 (function() {
     'use strict';
 
@@ -15,7 +17,7 @@
     lnk.rel = "stylesheet";
     lnk.href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
     document.head.appendChild(lnk);
-    document.body.style.background = "#2c8fe4";
+    document.body.style.background = maincolor;
     //document.getElementByTag("A:link").style.color ="magenta";//change the font color in calender
     document.querySelector(".pagebodydiv > div.infotextdiv").style.display = "none";
     var search = document.querySelector('.pagebodydiv > form:nth-child(2) > table:nth-child(1)');
