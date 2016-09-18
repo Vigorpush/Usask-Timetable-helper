@@ -23,6 +23,17 @@ var runEverySecond = function(){
 };
 
 $(document).ready(function() {
+	/*
+    so far those are not working by somereason
+	 */
+	//Adding Share Button
+	var newEm = document.createElement("span");
+	newEm.innerHTML= "share";
+	newEm.id = "share_button";
+	newEm.addEventListener('click', ShareAction, true);//callback the ShareAction function
+	addStyle("#share_button{margin:9px 0 0 0; background:black; left:20px;}");
+	alert("test");
+	//
     setInterval(runEverySecond,1000);
 });
 //End of testing jQuery
@@ -47,16 +58,7 @@ $(document).ready(function() {
 	var timeTable = document.querySelector('.datadisplaytable');
 	timeTable.className = tableStyle;
 
-	/*
-    so far those are not working by somereason
-	 */
-	//Adding Share Button
-	var newEm = document.createElement("span");
-	newEm.innerHTML= "share";
-	newEm.id = "share_button";
-	newEm.addEventListener('click', ShareAction, true);//callback the ShareAction function
-	addStyle("#share_button{margin:9px 0 0 0; background:black}");
-	alert("test");
+	
 
 
 })();
