@@ -21,7 +21,8 @@ newCSS += "";
 
 $(document).ready(function() {
 	
-	
+    
+    $(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
     /*
      * Creating the share button 
      * 
@@ -46,8 +47,7 @@ $(document).ready(function() {
 	lnk.rel = "stylesheet";
 	lnk.href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
 	document.head.appendChild(lnk);
-	document.body.style.background = maincolor;
-	//document.getElementByTag("A:link").style.color ="magenta";//change the font color in calender, which is not working
+	//document.body.style.background = maincolor;
 	document.querySelector(".pagebodydiv > div.infotextdiv").style.display = "none";
 	var search = document.querySelector('.pagebodydiv > form:nth-child(2) > table:nth-child(1)');
 	if (search) {
