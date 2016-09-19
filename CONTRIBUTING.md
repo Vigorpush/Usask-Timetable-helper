@@ -65,3 +65,8 @@ If for some reason, something goes wrong with pushing, you can try these steps
 ------------------------------------------------------------------
 ###Temper Monkey - Greasy Fork - safe and useful user scripts
 - https://greasyfork.org/en
+
+------------------------------------------------------------------
+###How to set SSH into Linux machine
+- http://www.codeproject.com/Articles/497728/HowplustoplusUseplusSSHplustoplusAccessplusaplusLi
+
