@@ -26,17 +26,17 @@ $(document).ready(function() {
     /*
      * Creating the share button 
      * 
-     * Make the Button shows up
-     * Add functions for testing
      * Add share functionality works
 	 */
 	//TODO
-	var newEm = document.createElement("button");
-	newEm.innerHTML= "share";
-	newEm.id = "share_button";
-	newEm.addEventListener('click', ShareAction, true); //callback the ShareAction function
-	addStyle("#share_button{margin:9px 0 0 0; background:black; left:20px;}");
-	alert("test"); //this code will check the button creating function is processed or not, feel free to delete.
+    var input=document.createElement("input");
+    input.type="button";
+    input.value="Share!";
+    input.id = "Share_button";
+    input.onclick = ShareAction;
+    input.setAttribute("style", "font-size:18px;position:absolute;bottom:120px;right:40px;");
+    document.body.appendChild(input); 
+     
 
 });
 
@@ -73,5 +73,6 @@ $(document).ready(function() {
 	//Function Share function Caller
 	function ShareAction(){
 		alert("Share Button work!");
-}
+	}
+	
 
