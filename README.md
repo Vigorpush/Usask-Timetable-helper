@@ -6,11 +6,11 @@ This plugin has different names depending on the Environment.
 - GreaseMonkey - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)
 - TamperMonkey - [Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/), [Opera](https://addons.opera.com/en/extensions/details/tampermonkey-beta/?display=en), [Safari](https://tampermonkey.net/?browser=safari), [Edge](https://www.microsoft.com/en-us/store/p/tampermonkey/9nblggh5162s)
 
+---
+
 For this project, we will make use of TamperMonkey for full cross-browser compatibility
 
 The script we will be creating will add functionality such as:
 - being able to get a nicely formatted view of your schedule for printing
 - ability to share the schedule with others
 - ability to export the schedule to other formats such as .ical, .pdf, (tentatively) .png|.jpg
-
-// Testing commit by Mark.
