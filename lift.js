@@ -23,6 +23,7 @@ $(document).ready(function() {
 	
     
     $(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
+    
     /*
      * Creating the share button 
      * 
@@ -31,7 +32,7 @@ $(document).ready(function() {
      * Add share functionality works
 	 */
 	//TODO
-	var newEm = document.createElement("span");
+	var newEm = document.createElement("button");
 	newEm.innerHTML= "share";
 	newEm.id = "share_button";
 	newEm.addEventListener('click', ShareAction, true);//callback the ShareAction function
