@@ -35,7 +35,7 @@ $(document).ready(function() {
     input.value="Share!";
     input.id = "Share_button";
     input.onclick = ShareAction;
-    input.setAttribute("style", "font-size:18px;position:absolute;top:120px;right:40px;");
+    input.setAttribute("style", "font-size:18px;position:absolute;bottom:120px;right:40px;");
     document.body.appendChild(input); 
      
 
