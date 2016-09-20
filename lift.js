@@ -34,6 +34,8 @@ function CreateButton(){
 	input.value="Share!";
 	input.id = "Share_button";
 	input.onclick = ShareAction;
+	//TODO
+	//Add style into this button
 	input.setAttribute("style", "font-size:18px;position:absolute;bottom:120px;right:40px;");
 	document.body.appendChild(input); 
 }
@@ -50,6 +52,8 @@ function addStyle(css){
  * Function Share function Caller
  * */
 function ShareAction(){
+	//TODO
+	//Edit some code into here, for sharing
 	alert("Share Button work!");
 }
 
