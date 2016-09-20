@@ -3,7 +3,7 @@
 //@namespace    http://tampermonkey.net/
 //@version      0.1
 //@description  A bit of Javascript for enhancing the LAF of the timetable page on the usask website
-//@author       Zang JiaWei, Nobleman Chukwu, Bengin Lee
+//@author       Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
 //@match        https://pawnss.usask.ca/ban/*
 //@require   	http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
 //@grant        none
@@ -21,7 +21,6 @@ newCSS += "";
 
 $(document).ready(function() {
 	
-    
     $(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
     
     /*
@@ -35,9 +34,9 @@ $(document).ready(function() {
 	var newEm = document.createElement("button");
 	newEm.innerHTML= "share";
 	newEm.id = "share_button";
-	newEm.addEventListener('click', ShareAction, true);//callback the ShareAction function
+	newEm.addEventListener('click', ShareAction, true); //callback the ShareAction function
 	addStyle("#share_button{margin:9px 0 0 0; background:black; left:20px;}");
-	alert("test");//this code will check the button creating function is processed or not, feel free to delete.
+	alert("test"); //this code will check the button creating function is processed or not, feel free to delete.
 
 });
 
@@ -68,6 +67,7 @@ $(document).ready(function() {
 	function addStyle(css){
 		document.head.appendChild(document.createElement("style")).textContent = css;
 	}
+	
 	addStyle(newCSS);
 	
 	//Function Share function Caller

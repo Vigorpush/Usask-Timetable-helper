@@ -43,6 +43,7 @@ If for some reason, something goes wrong with pushing, you can try these steps
 - Right-click the project again and select `Team` -> `Share project` -> `Git` -> Select the repo and press `Finish`
 
 ------------------------------------------------------------------
+
 ### Misc
 
 #### Pushing changes to gitlab
@@ -59,14 +60,18 @@ If for some reason, something goes wrong with pushing, you can try these steps
 [gen ssh]: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 
 ------------------------------------------------------------------
-### Temper Monkey Documentation
+
+#### Tamper Monkey Documentation
 - https://tampermonkey.net/documentation.php
 
 ------------------------------------------------------------------
-### Temper Monkey - Greasy Fork - safe and useful user scripts
+
+#### Tamper Monkey - Greasy Fork - safe and useful user scripts
 - https://greasyfork.org/en
+- https://openuserjs.org/
 
 ------------------------------------------------------------------
-### How to set SSH into Linux machine
+
+#### How to set SSH into Linux machine
 - http://www.codeproject.com/Articles/497728/HowplustoplusUseplusSSHplustoplusAccessplusaplusLi
 - this will be similar with setting the SSH in WINOWS
