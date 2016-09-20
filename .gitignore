@@ -48,3 +48,4 @@ fabric.properties
 .idea/
 *.iml
 /.project
+*.md.html
