@@ -29,6 +29,7 @@ $(document).ready(function() {
 
 
 function DatePick(){//dd
+	alert("test");
 	$('input[name=start_date_in]').DatePicker({
 		format:'m/d/Y',
 		date: $('#input[name=start_date_in]').val(),
@@ -97,7 +98,7 @@ function ShareAction(){
 	var tableStyle = 'table table-striped table-bordered table-condensed table-responsive';
 	var timeTable = document.querySelector('.datadisplaytable');
 	timeTable.className = tableStyle;
-	$("input[name=start_date_in]").addEventListener("click", DatePick); //dd
+	$("input[name=start_date_in]").addEventListener("focus", DatePick); //dd
 
 })();
 
