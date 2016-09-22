@@ -82,15 +82,47 @@ function DatePick(){//dd
  * Add share functionality works
  */
 function CreateButton(){
-	var input=document.createElement("input");
-	input.type="button";
-	input.value="Share!";
+	var input=document.createElement("div");
+	//input.type="button";
+	//input.innerHTML="Share!";
 	input.id = "Share_button";
 	input.onclick = ShareAction;
 	//TODO
 	//Add style into this button
-	input.setAttribute("style", "font-size:18px;position:absolute;bottom:120px;right:40px;");
+//	$("#Share_button").css({ 
+//		'font-size':'1em',
+//		'position':'fixed',
+//		'bottom':'40px',
+//		'right':'40px',
+//		'border-radius':'50%',
+//		'overflow':'hidden',
+//		'width':'60px',
+//		'height':'60px',
+//		'border':'5px solid #39a3b1',
+//		'background':'#39a3b1',
+//		'box-shadow':'0px 0px 20px 0px #000'
+//		
+//	});
+	//var buttonstyle = : :40px;right:40px;border-radius:50%;overflow:hidden;" +
+	//		"width:60px;height:60px;border:5px solid #39a3b1;background:#39a3b1;box-shadow: 0px 0px 20px 0px #000";
+	
+	//input.setAttribute("style", buttonstyle);
 	document.body.appendChild(input); 
+	
+	$("#Share_button").css({ 
+		'font-size':'1em',
+		'position':'fixed',
+		'bottom':'40px',
+		'right':'40px',
+		'border-radius':'50%',
+		'overflow':'hidden',
+		'width':'60px',
+		'height':'60px',
+		'border':'5px solid #39a3b1',
+		'background':'#39a3b1',
+		'box-shadow':'0px 0px 20px 0px #000'
+		
+	});
 }
 
 /**
@@ -130,7 +162,6 @@ function ShareAction(){
 		console.log("Found the search thingy");
 	}
 	search.style.display = 'none';
-	
 	*/
 	var tableStyle = 'table table-striped table-bordered table-condensed table-responsive';
 	var timeTable = document.querySelector('.datadisplaytable');
