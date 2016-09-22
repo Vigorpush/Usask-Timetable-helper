@@ -19,10 +19,15 @@ newCSS += "";
 var maincolor = "#2c8fe4";
 var search = document.querySelector('.pagebodydiv > form:nth-child(2) > table:nth-child(1)');
 
+
 $(document).ready(function() {
 	$(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
 	CreateButton();
 	addStyle(newCSS);
+	//$("input[name=start_date_in]").addEventListener("focusin", alert("touch down")); //dd
+	//$("input:text[name='start_date_in']").bind("click", DatePick);
+	//submit
+	$("input[type='submit']").bind("click", alert("hah"));
 });
 
 /**
@@ -64,17 +69,8 @@ function rid_number(){
 }
 
 function DatePick(){//dd
-	alert("test");
-	$('input[name=start_date_in]').DatePicker({
-		format:'m/d/Y',
-		date: $('#input[name=start_date_in]').val(),
-		current: $('#input[name=start_date_in]').val(),
-		starts: 1,
-		position: 'r',
-		onBeforeShow: function(){
-			$('#input[name=start_date_in]').DatePickerSetDate($('#input[name=start_date_in]').val(), true);
-		},
-	});
+	alert("Date pick function is runing");
+
 }
 
 /**
@@ -144,7 +140,6 @@ function ShareAction(){
 	var tableStyle = 'table table-striped table-bordered table-condensed table-responsive';
 	var timeTable = document.querySelector('.datadisplaytable');
 	timeTable.className = tableStyle;
-	$("input[name=start_date_in]").addEventListener("focus", DatePick); //dd
 
 })();
 
