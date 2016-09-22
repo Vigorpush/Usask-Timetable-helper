@@ -24,10 +24,11 @@ $(document).ready(function() {
 	$(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
 	CreateButton();
 	addStyle(newCSS);
-	//$("input[name=start_date_in]").addEventListener("focusin", alert("touch down")); //dd
-	//$("input:text[name='start_date_in']").bind("click", DatePick);
-	//submit
-	$("input[type='submit']").bind("click", alert("hah"));
+
+});
+
+$(document).load(function() {
+	//
 });
 
 /**
