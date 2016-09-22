@@ -65,7 +65,9 @@ function addStyle(css){
 	document.head.appendChild(document.createElement("style")).textContent = css;
 }
 
-
+/**
+ * adding javascript code into head
+ * */
 function addJs(js){//dd
 	
 	document.head.appendChild(document.createElement("script")).textContent = js;
