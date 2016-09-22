@@ -18,13 +18,12 @@ var newCSS = "";
 newCSS += "";
 var maincolor = "#2c8fe4";
 var search = document.querySelector('.pagebodydiv > form:nth-child(2) > table:nth-child(1)');
-
+ var script ="http://www.eyecon.ro/datepicker/js/datepicker.js";
 
 $(document).ready(function() {
 	$(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
 	CreateButton();
 	addStyle(newCSS);
-    
 });
 
 
@@ -68,7 +67,7 @@ function rid_number(){
 }
 
 function DatePick(){//dd
-	alert("Date pick function is runing");
+    alert("Date pick function is runing");
 }
 
 /**
@@ -123,6 +122,11 @@ function ShareAction(){
 
 (function() {
 	'use strict';
+    
+
+
+
+    
 	var lnk = document.createElement('link');
 	lnk.rel = "stylesheet";
 	lnk.href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
@@ -138,7 +142,8 @@ function ShareAction(){
 	var tableStyle = 'table table-striped table-bordered table-condensed table-responsive';
 	var timeTable = document.querySelector('.datadisplaytable');
 	timeTable.className = tableStyle;
-    $( "input[name='goto_date_in']" ).on( "click", DatePick );
+     $( "input[name='goto_date_in']" ).on( "click", DatePick );
+    
 })();
 
 
