@@ -17,16 +17,51 @@
 var newCSS = "";
 newCSS += "";
 var maincolor = "#2c8fe4";
-var newjs = "http://www.eyecon.ro/datepicker/js/datepicker.js";
 var search = document.querySelector('.pagebodydiv > form:nth-child(2) > table:nth-child(1)');
 
 $(document).ready(function() {
 	$(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
 	CreateButton();
 	addStyle(newCSS);
-	addJs(newjs);//dd
 });
 
+/**
+ * Add button above the schedule to allow navigation between terms
+ * */
+function navigation_term(){
+	
+}
+
+/**
+ * Replace the title with "Student schedule for 2016-2017 Term 1"
+ * */
+function replace_title(){
+	
+}
+
+
+/**
+ * Highlight the current day
+ * */
+function hightlight_current(){
+	
+}
+
+
+/**
+ * Large buttons for navigating the weeks. Kinda like the Google images page
+ * */
+function navigating_weeks(){
+	
+}
+
+
+/**
+ * Get rid of the hideous number that shows the number of weeks you have been attending the UofS
+ * */
+function rid_number(){
+	
+}
 
 function DatePick(){//dd
 	alert("test");
