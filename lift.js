@@ -24,12 +24,10 @@ $(document).ready(function() {
 	$(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
 	CreateButton();
 	addStyle(newCSS);
-
+    
 });
 
-$(document).load(function() {
-	//
-});
+
 
 /**
  * Add button above the schedule to allow navigation between terms
@@ -71,7 +69,6 @@ function rid_number(){
 
 function DatePick(){//dd
 	alert("Date pick function is runing");
-
 }
 
 /**
@@ -141,7 +138,7 @@ function ShareAction(){
 	var tableStyle = 'table table-striped table-bordered table-condensed table-responsive';
 	var timeTable = document.querySelector('.datadisplaytable');
 	timeTable.className = tableStyle;
-
+    $( "input[name='goto_date_in']" ).on( "click", DatePick );
 })();
 
 
