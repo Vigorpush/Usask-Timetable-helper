@@ -14,3 +14,15 @@ The script we will be creating will add functionality such as:
 - being able to get a nicely formatted view of your schedule for printing
 - ability to share the schedule with others
 - ability to export the schedule to other formats such as .ical, .pdf, (tentatively) .png|.jpg
+
+---
+
+To use, install the corresponding Monkey plugin, 
+
+click the icon that appears on your browser bar,
+
+add a new Javascript script,
+
+copy and paste the lift.js code file found in this repository,
+
+and then CTRL-S or manually select the top left save button to execute.
