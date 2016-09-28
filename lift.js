@@ -21,7 +21,8 @@ var script ="http://www.eyecon.ro/datepicker/js/datepicker.js";
 
 $(document).ready(function() {
 	$(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
-	CreateButton();
+    CreateButton();
+    navigation_term(); //SHARE BUTTON WORKS, BUT OTHER ONE DOES NOT
 	addStyle(newCSS);
 });
 
@@ -31,7 +32,24 @@ $(document).ready(function() {
  * Add button above the schedule to allow navigation between terms
  * */
 function navigation_term(){
+	var input=document.createElement("div");
+	input.id = "Term_button";
+	input.onclick = ChangeTermAction;
+	document.body.appendChild(input); 
 	
+	$("#Share_button").css({ 
+		'font-size':'1em',
+		'position':'fixed',
+		'bottom':'20px',
+		'right':'20px',
+		'border-radius':'50%',
+		'overflow':'hidden',
+		'width':'30px',
+		'height':'30px',
+		'border':'5px solid ##7FFFD4',
+		'background':'#7FFFD4',
+		'box-shadow':'0px 0px 20px 0px #000'
+	});
 }
 
 /**
@@ -117,6 +135,15 @@ function ShareAction(){
 	alert("Share Button work!");
 }
 
+/**
+ * 
+ * Helper function for the change term button
+ * */
+function ChangeTermAction(){
+	//TODO
+	alert("Changing terms button works, hallelujah!");
+}
+
 (function() {
 	'use strict';
 	var lnk = document.createElement('link');
@@ -136,6 +163,5 @@ function ShareAction(){
 	timeTable.className = tableStyle;
      $( "input[name='goto_date_in']" ).on( "click", DatePick );
 })();
-
 
 
