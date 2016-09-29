@@ -16,16 +16,68 @@
 $(document).ready(function () {
     addStyleSheet('bootStrap');
     $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
+    $('.datadisplaytable > tbody:nth-child(1) > tr:nth-child(2)').clone()
+        .after('.datadisplaytable > tbody:nth-child(1) > tr:nth-child(2)');
+    $(".pagebodydiv > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1)").css({
+        'font-size' : '1.5em'
+    });
+
+    listenForDateChange();
+    highlightCurrentDay();
     CreateButton();
     replace_title();
     rid_number();
-    highlightCurrentDay();
+    navigation_term();
 });
+
+
+
+function listenForDateChange() {
+    var monthNames = [
+        "January", "February", "March", "April",
+        "May", "June", "July", "August",
+        "September", "October", "November", "December"
+    ];
+
+    var today = new Date();
+
+    var fieldText = $(".fieldlargetext")
+        .text(monthNames[today.getMonth()] + " " + today.getFullYear());
+
+    $('a[href*="start_date_in"]').on("click", function() {
+        $(document).on("pageload",function(){
+            var selected = window.location.href;
+            var the_date = selected.match(/\d+\/\d+\/\d+/);
+
+            var clickedDate = new Date(the_date);
+            $(fieldText).text(monthNames[clickedDate.getMonth()] + " " + clickedDate.getFullYear());
+        });
+    });
+}
+
 /**
  * Add button above the schedule to allow navigation between terms
+ *
  * */
-function navigation_term() {
+function navigation_term(){
+    var input=document.createElement("div");
+    input.id = "Term_button";
+    input.onclick = ChangeTermAction;
+    document.body.appendChild(input);
 
+    $("#Term_button").css({
+        'font-size':'1em',
+        'position':'fixed',
+        'bottom':'50px',
+        'right':'20px',
+        'border-radius':'50%',
+        'overflow':'hidden',
+        'width':'30px',
+        'height':'30px',
+        'border':'5px solid ##7FFFD4',
+        'background':'#7FFFD4',
+        'box-shadow':'0px 0px 20px 0px #000'
+    });
 }
 
 /**
@@ -66,31 +118,28 @@ function rid_number() {
     //TODO: Somehow obtain the current week number. Right now it's just hard-coded, not what we want.
 
     //Remove the useless information detailing the total number of weeks a student has been attending the U of S.
-    document.querySelector(".fieldmediumtext").style.display = 'none';
-
-    var monthNames = [
-        "January", "February", "March", "April",
-        "May", "June", "July", "August",
-        "September", "October", "November", "December"
-    ];
-
-    var today = new Date();
-    var date = today.getDate();
-    var monthIndex = today.getMonth();
-    var year = today.getFullYear();
-
-    var day = today.getDay();
-    for (var i = -1; day > 0; day--) {
-        i++
-    }
-
-    var weekOf = date - i;
-
-    var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
-
-    //Changes "Week of Sep 26, 2016" to "Week # September 26, 2016"
-    document.querySelector(".fieldlargetext").innerHTML =
-        ('Week 4 ' + monthNames[monthIndex] + ' ' + weekOf + ', ' + year);
+    // document.querySelector(".fieldmediumtext").style.display = 'none';
+    //
+    //
+    //
+    // var today = new Date();
+    // var date = today.getDate();
+    // var monthIndex = today.getMonth();
+    // var year = today.getFullYear();
+    //
+    // var day = today.getDay();
+    // for (var i = -1; day > 0; day--) {
+    //     i++
+    // }
+    //
+    // var weekOf = date - i;
+    //
+    // var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+    //
+    // //Changes "Week of Sep 26, 2016" to "Week # September 26, 2016"
+    //
+    // document.querySelector(".fieldlargetext").innerHTML =
+    //     (monthNames[monthIndex] + ' ' + year);
 }
 
 function DatePick() {
@@ -202,4 +251,11 @@ function ShareAction() {
     alert("Share Button work! And so does JQuery!");
 }
 
-
+/**
+ *
+ * Helper function for the change term button
+ * */
+function ChangeTermAction(){
+    //TODO
+    alert("Changing terms button works, hallelujah!");
+}
