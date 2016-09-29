@@ -1,11 +1,7 @@
 THINGS WE SHOULD DO
-Replace the title with "Student schedule for 2016-2017 Term 1"
-
 Add button above the schedule to allow navigation between terms
 
 Get rid of the hideous number that shows the number of weeks you have been attending the UofS
-
-Highlight the current day
 
 Large buttons for navigating the weeks. Kinda like the Google images page
 
