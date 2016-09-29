@@ -11,12 +11,8 @@ Large buttons for navigating the weeks. Kinda like the Google images page
 
 
 
-
-
 THINGS WE REALLLY WANT TO DO BUT UHHHHH NOT SURE...
 Add current time to the schedule kinda like that the iOS calendar app does
-
-
 
 
 

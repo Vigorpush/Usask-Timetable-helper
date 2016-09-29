@@ -1,106 +1,137 @@
-//==UserScript==
-//@name         UofS TimeTable Enhancer
-//@namespace    http://tampermonkey.net/
-//@version      0.1
-//@description  A bit of Javascript for enhancing the LAF of the timetable page on the usask website
-//@author       Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
-//@match        https://pawnss.usask.ca/ban/*
-//@require   	http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js
-//@require		http://www.eyecon.ro/datepicker/js/datepicker.js
-//@grant        none
-//==/UserScript==
+// ==UserScript==
+// @name		UofS TimeTable Enhancer
+// @namespace	http://tampermonkey.net/
+// @version		0.1
+// @description	A bit of Javascript for enhancing the LAF of the timetable page on the usask website
+// @author		Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
+// @match		https://pawnss.usask.ca/ban/*
+// @require		https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
+// @require		https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+// @require		http://www.eyecon.ro/datepicker/js/datepicker.js
+// @resource	bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+// @grant		GM_getResourceText
+// @grant		GM_addStyle
+// ==/UserScript==
 
 
 /**
  * Add CSS into this variable
  */
-var newCSS = "";
-newCSS += "";
-var maincolor = "#2c8fe4";
-var newjs = "http://www.eyecon.ro/datepicker/js/datepicker.js";
-var search = document.querySelector('.pagebodydiv > form:nth-child(2) > table:nth-child(1)');
 
-$(document).ready(function() {
-	$(".ddlabel A").css({ 'color': '#39a3b1', 'font-size': '100%' });
-	CreateButton();
-	addStyle(newCSS);
-	addJs(newjs);//dd
+$(document).ready(function () {
+    addStyleSheet('bootStrap');
+    $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
+    CreateButton();
+    highlightCurrentDay();
 });
 
 
-function DatePick(){//dd
-	alert("test");
-	$('input[name=start_date_in]').DatePicker({
-		format:'m/d/Y',
-		date: $('#input[name=start_date_in]').val(),
-		current: $('#input[name=start_date_in]').val(),
-		starts: 1,
-		position: 'r',
-		onBeforeShow: function(){
-			$('#input[name=start_date_in]').DatePickerSetDate($('#input[name=start_date_in]').val(), true);
-		},
-	});
+function DatePick() {
+    alert("test");
+    $('input[name=start_date_in]').DatePicker({
+        format: 'm/d/Y',
+        date: $('#input[name=start_date_in]').val(),
+        current: $('#input[name=start_date_in]').val(),
+        starts: 1,
+        position: 'r',
+        onBeforeShow: function () {
+            $('#input[name=start_date_in]').DatePickerSetDate($('#input[name=start_date_in]').val(), true);
+        },
+    });
 }
 
 /**
- * Creating the share button 
+ * Creating the share button
  * Add share functionality works
  */
-function CreateButton(){
-	var input=document.createElement("input");
-	input.type="button";
-	input.value="Share!";
-	input.id = "Share_button";
-	input.onclick = ShareAction;
-	//TODO
-	//Add style into this button
-	input.setAttribute("style", "font-size:18px;position:absolute;bottom:120px;right:40px;");
-	document.body.appendChild(input); 
+function CreateButton() {
+    var input = document.createElement("input");
+    input.type = "button";
+    input.value = "Share!";
+    input.id = "Share_button";
+    input.onclick = ShareAction;
+    //TODO
+    //Add style into this button
+    input.setAttribute("style", "font-size:18px;position:absolute;bottom:120px;right:40px;");
+    document.body.appendChild(input);
 }
 
 /**
  * adding style into head
- * */
-function addStyle(css){
-	document.head.appendChild(document.createElement("style")).textContent = css;
+ */
+function addStyleSheet(resName) {
+    var style = GM_getResourceText(resName);
+    GM_addStyle(style);
 }
 
-
-function addJs(js){//dd
-	
-	document.head.appendChild(document.createElement("script")).textContent = js;
-}
 /**
- * 
- * Function Share function Caller
- * */
-function ShareAction(){
-	//TODO
-	//Edit some code into here, for sharing
-	alert("Share Button work!");
+ * Function to highlight all the cells that correspond to the current
+ * day
+ */
+function highlightCurrentDay() {
+    var d = new Date().getDay() - 1;
+    var timeTable = $('table.datadisplaytable')
+        .addClass("table table-striped table-bordered table-responsive table-condensed");
+
+
+    // Since the table cells are staggered, we need a way of
+    // knowing where each cell begins and ends
+    function Cell(occuppiedBefore, row) {
+        this.ocb = occuppiedBefore;
+        this.height = row;
+    }
+
+    var rowInfo = [new Cell(0, 0),
+        new Cell(0, 0),
+        new Cell(0, 0),
+        new Cell(0, 0),
+        new Cell(0, 0),
+        new Cell(0, 0),
+        new Cell(0, 0)
+    ];
+
+    $(timeTable).find('tr').slice(1)
+        .each(function (_) {
+            var currRow = $(this);
+            $.each(rowInfo, function (key, cell) {
+                // height of zero means that the original row ends here and a new row starts
+                if (cell.height == 0) {
+                    var currCell = currRow.find('td:nth-of-type(' + (key - cell.ocb + 1) + ')');
+                    var span = $(currCell).attr('rowspan');
+
+                    cell.height = span ? parseInt(span) : 1;
+
+                    if (key == d) {
+                        $(currCell).css({
+                            'background-color': '#2daf6e'
+                        }).find('a').css({
+                            'color': 'white'
+                        });
+                    }
+                }
+                if (key > 0) {
+                    cell.ocb = rowInfo[key - 1].ocb + (rowInfo[key - 1].height > 0);
+                }
+                cell.height--;
+            });
+        });
 }
 
-(function() {
-	'use strict';
-	var lnk = document.createElement('link');
-	lnk.rel = "stylesheet";
-	lnk.href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
-	document.head.appendChild(lnk);
-	document.querySelector(".pagebodydiv > div.infotextdiv").style.display = "none";
-	/*
-	 * var search = document.querySelector('.pagebodydiv > form:nth-child(2) > table:nth-child(1)');
-	if (search) {
-		console.log("Found the search thingy");
-	}
-	search.style.display = 'none';
-	
-	*/
-	var tableStyle = 'table table-striped table-bordered table-condensed table-responsive';
-	var timeTable = document.querySelector('.datadisplaytable');
-	timeTable.className = tableStyle;
-	$("input[name=start_date_in]").addEventListener("focus", DatePick); //dd
+/**
+ * Function Share function Caller
+ */
+function ShareAction() {
+    //TODO
+    //Edit some code into here, for sharing
+    alert("Share Button work! And so does JQuery!");
+}
 
-})();
+
+
+
+
+
+
 
 
 
