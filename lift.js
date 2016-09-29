@@ -50,7 +50,7 @@ function replace_title(){
 	//If we want to keep that information, we'll need to create a table.
 	document.querySelector(".pagetitlediv").innerHTML = "Student Schedule for 2016 - 2017 Term 1<br><br>";
 	document.querySelector(".pagetitlediv").style.color = '#39a3b1';
-	document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
+	document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
 	//Removes the useless information on the page that no one reads.
 	document.querySelector(".pagebodydiv > div.infotextdiv").style.display = 'none';
 }
