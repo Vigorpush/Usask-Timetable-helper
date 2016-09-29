@@ -20,6 +20,11 @@ $(document).ready(function () {
     replace_title();
     rid_number();
     highlightCurrentDay();
+    //this is test for canlender
+    //the best way to solve it is replace the attributes of the tags
+    $( "input[name='goto_date_in']" ).focus(function(){
+    	HS_setDate(this);
+    });
 });
 /**
  * Add button above the schedule to allow navigation between terms
@@ -94,17 +99,7 @@ function rid_number() {
 }
 
 function DatePick() {
-    alert("test");
-    $('input[name=start_date_in]').DatePicker({
-        format: 'm/d/Y',
-        date: $('#input[name=start_date_in]').val(),
-        current: $('#input[name=start_date_in]').val(),
-        starts: 1,
-        position: 'r',
-        onBeforeShow: function () {
-            $('#input[name=start_date_in]').DatePickerSetDate($('#input[name=start_date_in]').val(), true);
-        }
-    });
+
 }
 
 /**
@@ -217,6 +212,7 @@ function HS_DateAdd(interval,number,date){
 	case "d":return new Date(date.getFullYear(),date.getMonth(),date.getDate()+number); break;
 	case "w":return new Date(date.getFullYear(),date.getMonth(),7*number+date.getDate()); break;
 	}
+
 }
 function checkDate(year,month,date){
 	var enddate = ["31","28","31","30","31","30","31","31","30","31","30","31"];
@@ -305,6 +301,8 @@ function HS_calender(){
 function _selectThisDay(d){
 	var boxObj = d.parentNode.parentNode.parentNode.parentNode.parentNode;
 		boxObj.targetObj.value = d.title;
+		alert("please some one change the order of ： "+boxObj.targetObj.value);
+		//TODO
 		boxObj.parentNode.removeChild(boxObj);
 }
 function closeCalender(d){
