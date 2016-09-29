@@ -81,7 +81,7 @@ function rid_number() {
 
     var day = today.getDay();
     for (var i = -1; day > 0; day--) {
-        i++
+        i++;
     }
 
     var weekOf = date - i;
@@ -171,7 +171,7 @@ function highlightCurrentDay() {
             var currRow = $(this);
             $.each(rowInfo, function (key, cell) {
                 // height of zero means that the original row ends here and a new row starts
-                if (cell.height == 0) {
+                if (cell.height === 0) {
                     var currCell = currRow.find('td:nth-of-type(' + (key - cell.ocb + 1) + ')');
                     var span = $(currCell).attr('rowspan');
 
