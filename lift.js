@@ -22,9 +22,9 @@ $(document).ready(function () {
     highlightCurrentDay();
     //this is test for canlender
     //the best way to solve it is replace the attributes of the tags
-    $( "input[name='goto_date_in']" ).focus(function(){
-    	HS_setDate(this);
-    });
+//    $( "input[name='goto_date_in']" ).focus(function(){
+//    	HS_setDate(this);
+//    });
 });
 /**
  * Add button above the schedule to allow navigation between terms
