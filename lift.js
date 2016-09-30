@@ -20,11 +20,9 @@ $(document).ready(function () {
     replace_title();
     rid_number();
     highlightCurrentDay();
-    //this is test for canlender
-    //the best way to solve it is replace the attributes of the tags
-//    $( "input[name='goto_date_in']" ).focus(function(){
-//    	HS_setDate(this);
-//    });
+    $( "input[name='goto_date_in']" ).focus(function(){
+    	HS_setDate(this);
+    });
 });
 /**
  * Add button above the schedule to allow navigation between terms
@@ -204,8 +202,8 @@ function ShareAction() {
 //Start of date picker function
 function HS_DateAdd(interval,number,date){
 	number = parseInt(number);
-	if (typeof(date)=="string"){var date = new Date(date.split("-")[0],date.split("-")[1],date.split("-")[2])}
-	if (typeof(date)=="object"){var date = date}
+	if (typeof(date)=="string"){var date = new Date(date.split("-")[0],date.split("-")[1],date.split("-")[2]);}
+	if (typeof(date)=="object"){var date = date;}
 	switch(interval){
 	case "y":return new Date(date.getFullYear()+number,date.getMonth(),date.getDate()); break;
 	case "m":return new Date(date.getFullYear(),date.getMonth()+number,checkDate(date.getFullYear(),date.getMonth()+number,date.getDate())); break;
@@ -217,14 +215,14 @@ function HS_DateAdd(interval,number,date){
 function checkDate(year,month,date){
 	var enddate = ["31","28","31","30","31","30","31","31","30","31","30","31"];
 	var returnDate = "";
-	if (year%4==0){enddate[1]="29"}
-	if (date>enddate[month]){returnDate = enddate[month]}else{returnDate = date}
+	if (year%4===0){enddate[1]="29";}
+	if (date>enddate[month]){returnDate = enddate[month];}else{returnDate = date;}
 	return returnDate;
 }
 function WeekDay(date){
 	var theDate;
 	if (typeof(date)=="string"){theDate = new Date(date.split("-")[0],date.split("-")[1],date.split("-")[2]);}
-	if (typeof(date)=="object"){theDate = date}
+	if (typeof(date)=="object"){theDate = date;}
 	return theDate.getDay();
 }
 function HS_calender(){
