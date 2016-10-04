@@ -16,7 +16,8 @@
 $(document).ready(function () {
     addStyleSheet('bootStrap');
     $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
-    CreateButton();
+    CreateButton(); //need naming standard for vars
+    navigation_term();
     replace_title();
     rid_number();
     highlightCurrentDay();
@@ -28,7 +29,28 @@ $(document).ready(function () {
  * Add button above the schedule to allow navigation between terms
  * */
 function navigation_term() {
+    var input = document.createElement("div");
+    input.id = "Term_button";
+    input.onclick = TermSwitchAction;
+    document.body.appendChild(input);
 
+    $("#Term_button").css({
+        'font-size': '1em',
+        'position': 'absolute',
+        'bottom': '420px',
+        'right': '80px',
+        'border-radius': '50%',
+        'overflow': 'hidden',
+        'width': '60px',
+        'height': '60px',
+        'border': '5px solid #00ffff',
+        'background': '#00ffff',
+        'box-shadow': '0px 0px 20px 0px #000'
+    });
+}
+
+function TermSwitchAction() {
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/02/2017";
 }
 
 /**
