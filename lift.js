@@ -8,6 +8,8 @@
 // @require		https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require		https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
 // @require		http://www.eyecon.ro/datepicker/js/datepicker.js
+// @require 	http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
+// @resource	sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
 // @resource	bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 // @grant		GM_getResourceText
 // @grant		GM_addStyle
@@ -110,13 +112,19 @@ var UofSTimeTable = (function () {
         init: function () {
             $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
             addStyleSheet('bootStrap');
+            addStyleSheet('sweetAlert');
+            return this;
         }
     }
 
 })();
 
 $(document).ready(function () {
-    UofSTimeTable.init();
+    UofSTimeTable.init().highlightDays({
+        cell_color: "#2fb673",
+        font_color: "white",
+        font_size: "1em"
+    });
 
     UofSTimeTable.CreateButton(); //need naming standard for vars
     navigation_term();
@@ -124,11 +132,6 @@ $(document).ready(function () {
     replace_title();
     rid_number();
 
-    UofSTimeTable.highlightDays({
-        cell_color: "#2fb673",
-        font_color: "white",
-        font_size: "1em"
-    });
 
     $("input[name='goto_date_in']").focus(function () {
         HS_setDate(this);
@@ -265,7 +268,12 @@ function DatePick() {
 function ShareAction() {
     //TODO
     //Edit some code into here, for sharing
-    alert("Share Button work! And so does JQuery!");
+	swal({
+		  title: "Error!",
+		  text: "Here's my error message!",
+		  type: "error",
+		  confirmButtonText: "Cool"
+		});
 }
 /**
  * Date picker function
