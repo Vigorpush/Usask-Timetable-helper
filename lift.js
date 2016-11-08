@@ -207,8 +207,7 @@ function replace_title() {
     document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
     //Removes the useless information on the page that no one reads.
     document.querySelector(".pagebodydiv > div.infotextdiv").style.display = 'none';
-}        
-
+}
 
 
 /**
@@ -240,48 +239,22 @@ function rid_number() {
         "September", "October", "November", "December"
     ];
 
+    /* Hide the week info stuff */
     $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(3)").hide();
-    
-    var Hithere = $("body > div.pagebodydiv > table.datadisplaytable.table.table-striped.table-bordered.table-responsive.table-condensed > tbody > tr:nth-child(1)");
-    var HithereElement = Hithere.clone();
-    Hithere.after(HithereElement);
-    
+
+    var weekDays = $("body > div.pagebodydiv > table.datadisplaytable.table.table-striped.table-bordered.table-responsive.table-condensed > tbody > tr:nth-child(1)");
+    var monthDate = weekDays.clone();
+    weekDays.after(monthDate);
+
     var today = new Date();
-    var date = today.getDate();
-    var monthIndex = today.getMonth();
-    var month = monthNames[monthIndex];
-//    var year = today.getFullYear();
-    
-    //$(HithereElement).children().slice(1).html("&nbsp;&nbsp;&nbsp;" + month);
-    //var day = today.getDay();
-    
-    var day = 7;
     today.setDate(today.getDate() - today.getDay());
-    
-    $(HithereElement).children().slice(1).each(function(index){
-        today.setDate( today.getDate() + 1 );
-        month = monthNames[today.getMonth()];
+
+    $(monthDate).children().slice(1).each(function (index) {
+        today.setDate(today.getDate() + 1);
+        var month = monthNames[today.getMonth()];
         var html_String = month + "&nbsp;" + today.getDate();
-        $(this).html("&nbsp;&nbsp;&nbsp;"+html_String);
+        $(this).html("&nbsp;&nbsp;&nbsp;" + html_String);
     });
-
-    
- 
-    
-//
-//    var weekOf = date - i;
-//
-//    var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
-//
-//    //Changes "Week of Sep 26, 2016" to "Week # September 26, 2016"
-//    document.querySelector(".fieldlargetext").innerHTML =
-//        ('Week 4 ' + monthNames[monthIndex] + ' ' + weekOf + ', ' + year);
-    
-   
-}
-
-function DatePick() {
-
 }
 
 
@@ -291,12 +264,10 @@ function DatePick() {
 function ShareAction() {
     //TODO
     //Edit some code into here, for sharing
-	swal({
-		  title: "Error!",
-		  text: "Here's my error message!",
-		  type: "error",
-		  confirmButtonText: "Cool"
-		});
+    swal({
+        title: "Error!",
+        text: "Here's my error message!",
+        type: "error",
+        confirmButtonText: "Cool"
+    });
 }
-
-//Testing commit - Mark
