@@ -116,7 +116,7 @@ var UofSTimeTable = (function () {
             addStyleSheet('sweetAlert');
             return this;
         }
-    }
+    };
 
 })();
 
@@ -232,7 +232,7 @@ function rid_number() {
     //TODO: Somehow obtain the current week number. Right now it's just hard-coded, not what we want.
 
     //Remove the useless information detailing the total number of weeks a student has been attending the U of S.
-    document.querySelector(".fieldmediumtext").style.display = 'none';
+    //document.querySelector(".fieldmediumtext").style.display = 'none';
 
     var monthNames = [
         "January", "February", "March", "April",
@@ -240,23 +240,44 @@ function rid_number() {
         "September", "October", "November", "December"
     ];
 
+    $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(3)").hide();
+    
+    var Hithere = $("body > div.pagebodydiv > table.datadisplaytable.table.table-striped.table-bordered.table-responsive.table-condensed > tbody > tr:nth-child(1)");
+    var HithereElement = Hithere.clone();
+    Hithere.after(HithereElement);
+    
     var today = new Date();
     var date = today.getDate();
     var monthIndex = today.getMonth();
-    var year = today.getFullYear();
+    var month = monthNames[monthIndex];
+//    var year = today.getFullYear();
+    
+    //$(HithereElement).children().slice(1).html("&nbsp;&nbsp;&nbsp;" + month);
+    //var day = today.getDay();
+    
+    var day = 7;
+    today.setDate(today.getDate() - today.getDay());
+    
+    $(HithereElement).children().slice(1).each(function(index){
+        today.setDate( today.getDate() + 1 );
+        month = monthNames[today.getMonth()];
+        var html_String = month + "&nbsp;" + today.getDate();
+        $(this).html("&nbsp;&nbsp;&nbsp;"+html_String);
+    });
 
-    var day = today.getDay();
-    for (var i = -1; day > 0; day--) {
-        i++;
-    }
-
-    var weekOf = date - i;
-
-    var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
-
-    //Changes "Week of Sep 26, 2016" to "Week # September 26, 2016"
-    document.querySelector(".fieldlargetext").innerHTML =
-        ('Week 4 ' + monthNames[monthIndex] + ' ' + weekOf + ', ' + year);
+    
+ 
+    
+//
+//    var weekOf = date - i;
+//
+//    var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+//
+//    //Changes "Week of Sep 26, 2016" to "Week # September 26, 2016"
+//    document.querySelector(".fieldlargetext").innerHTML =
+//        ('Week 4 ' + monthNames[monthIndex] + ' ' + weekOf + ', ' + year);
+    
+   
 }
 
 function DatePick() {
