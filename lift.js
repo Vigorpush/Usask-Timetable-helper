@@ -59,6 +59,7 @@ var UofSTimeTable = (function () {
                 'background': '#39a3b1',
                 'box-shadow': '0px 0px 20px 0px #000'
             });
+
         },
 
         /**
@@ -203,7 +204,8 @@ function replace_title() {
     document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
     //Removes the useless information on the page that no one reads.
     document.querySelector(".pagebodydiv > div.infotextdiv").style.display = 'none';
-}
+}        
+
 
 
 /**
