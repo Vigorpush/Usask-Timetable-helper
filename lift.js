@@ -13,8 +13,11 @@
 // @resource	bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 // @grant		GM_getResourceText
 // @grant		GM_addStyle
-// ==/UserScript==
+// ==/UserScript==  January 2
 
+
+
+var CURRENT_PAGE_MONDEY_DATE = new Date();
 var UofSTimeTable = (function () {
 
     /**
@@ -114,6 +117,7 @@ var UofSTimeTable = (function () {
             $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
             addStyleSheet('bootStrap');
             addStyleSheet('sweetAlert');
+            current_page_date();
             return this;
         }
     };
@@ -132,10 +136,19 @@ $(document).ready(function () {
     navigation_term_to_one();
     replace_title();
     rid_number();
-
+    
     $(".pageheaderdiv1 > h1").remove();
 
 });
+
+function current_page_date(){
+var regular_date = /(\w+ \d+.*)/;
+var match =  regular_date.exec($(".fieldlargetext").text());
+CURRENT_PAGE_MONDEY_DATE = new Date(match[1]);
+
+//alert("CURRENT_PAGE_MONDEY_DATE" + CURRENT_PAGE_MONDEY_DATE);
+
+}
 
 
 /**
@@ -244,14 +257,15 @@ function rid_number() {
     var monthDate = weekDays.clone();
     weekDays.after(monthDate);
 
-    var today = new Date();
-    today.setDate(today.getDate() - today.getDay());
+    var today = CURRENT_PAGE_MONDEY_DATE;
+    //today.setDate(today.getDate() - today.getDay());
 
     $(monthDate).children().slice(1).each(function (index) {
-        today.setDate(today.getDate() + 1);
+       
         var month = monthNames[today.getMonth()];
         var html_String = month + "&nbsp;" + today.getDate();
         $(this).html("&nbsp;&nbsp;&nbsp;" + html_String);
+     today.setDate(today.getDate() + 1);
     });
 
     //alert();
