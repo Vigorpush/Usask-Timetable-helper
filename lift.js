@@ -147,6 +147,8 @@ $(document).ready(function () {
     navigation_term_to_one();
     replace_title();
     rid_number();
+    makeTimeLabel();
+    t();
     
     $(".pageheaderdiv1 > h1").remove();
 
@@ -218,7 +220,7 @@ function TermSwitchToOneAction() {
 }
 
 /**
- * Replace the title with "Student schedule for 2016-2017 Term 1"
+ * Replace the title with "Student schedule for 2016-2017"
  * */
 function replace_title() {
     //TODO: Somehow obtain the current term and year. Right now it's just hard-coded.
@@ -305,4 +307,24 @@ function ShareAction() {
         type: "error",
         confirmButtonText: "Cool"
     });
+}
+
+var time = document.createElement('label'); //global var to update time
+/*
+make the actual time label
+*/
+function makeTimeLabel() {
+    time.innerHTML = new Date();    
+    document.getElementsByTagName('body')[0].appendChild(time);
+}
+
+function javascriptSux() {
+    time.innerHTML = new Date();    
+}
+
+/*
+update the time every second
+*/ 
+function t() {
+    window.setInterval(javascriptSux, 1000);
 }
