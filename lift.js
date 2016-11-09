@@ -20,8 +20,6 @@
 
 var UofSTimeTable = (function () {
 
-    // var TIMETABLE = $('table.datadisplaytable');
-
     /**
      * A cell object
      * Since the table cells are staggered, we need a way of
@@ -41,17 +39,38 @@ var UofSTimeTable = (function () {
         GM_addStyle(style);
     }
 
-    function current_page_date(){
+    function current_page_date() {
         var regular_date = /(\w+ \d+.*)/;
-        var match =  regular_date.exec($(".fieldlargetext").text());
+        var match = regular_date.exec($(".fieldlargetext").text());
         UofSTimeTable.CURRENT_PAGE_MONDAY_DATE = new Date(match[1]);
+    }
+
+    function EnlargeTopRows() {
+        var timeTable = UofSTimeTable.TIMETABLE;
+
+        timeTable.find("tr:nth-child(1)").children().slice(1).css({
+            "font-size": "2em",
+            "text-align": "center"
+        });
+
+        timeTable.find("tr:nth-child(2)").children().slice(1).css({
+            "font-size": "0.8em",
+            "text-align": "center"
+        });
     }
 
     return {
 
-        CURRENT_PAGE_MONDAY_DATE:  new Date(),
+        CURRENT_PAGE_MONDAY_DATE: new Date(),
 
         TIMETABLE: $('table.datadisplaytable'),
+
+
+        /**
+         * This enlarges the search top rows of the timetable table
+         * @constructor
+         */
+
 
         /**
          * Creating the share button
@@ -84,7 +103,7 @@ var UofSTimeTable = (function () {
          * day
          * @param params json object containing parameters for the state attributes of each cell
          */
-        highlightDays: function (params) {
+        HighlightDays: function (params) {
             var cell_color = params.cell_color || '#ffc61a';
             var font_color = params.font_color || 'white';
             var font_size = params.font_size || '1em';
@@ -95,13 +114,13 @@ var UofSTimeTable = (function () {
             temp.setDate(temp.getDate() + today.getDay() - 1);
 
 
-            var d = new Date().getDay() - 1;
             this.TIMETABLE.addClass("table table-striped table-bordered table-responsive table-condensed");
 
             if (today.getDate() != temp.getDate() || today.getMonth() != temp.getMonth()) {
                 return;
             }
 
+            var d = new Date().getDay() - 1;
 
             var rowInfo = [new Cell(), new Cell(), new Cell(),
                 new Cell(), new Cell(), new Cell(), new Cell()
@@ -138,16 +157,15 @@ var UofSTimeTable = (function () {
             $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
             addStyleSheet('bootStrap');
             addStyleSheet('sweetAlert');
-            // $(document).ready(current_page_date);
+            EnlargeTopRows();
             current_page_date();
             return this;
         }
     };
-
 })();
 
 $(document).ready(function () {
-    UofSTimeTable.init().highlightDays({
+    UofSTimeTable.init().HighlightDays({
         cell_color: "#2fb673",
         font_color: "white",
         font_size: "1em"
@@ -158,9 +176,8 @@ $(document).ready(function () {
     navigation_term_to_one();
     replace_title();
     rid_number();
-    IamBeautiful();
     makeTimeLabel();
-    t();
+    invokeTime();
 
     $(".pageheaderdiv1 > h1").remove();
 
@@ -276,22 +293,6 @@ function rid_number() {
     }
 }
 
-//CSS on the two row headers: Days and the dates.
-function IamBeautiful() {
-
-    var timeTable = UofSTimeTable.TIMETABLE;
-
-    timeTable.find("tr:nth-child(1)").children().slice(1).css({
-        "font-size": "2em",
-        "text-align" : "center"
-    });
-
-    timeTable.find("tr:nth-child(2)").children().slice(1).css({
-        "font-size": "0.8em",
-        "text-align" : "center"
-    });
-}
-
 /**
  * Function Share function Caller
  */
@@ -307,15 +308,16 @@ function ShareAction() {
 }
 
 var time = document.createElement('label'); //global var to update time
+
 /*
-make the actual time label
-*/
+ make the actual time label
+ */
 function makeTimeLabel() {
-    time.innerHTML = new Date();    
+    time.innerHTML = new Date();
     document.getElementsByTagName('body')[0].appendChild(time);
 }
 
-function javascriptSux() {
+function updateTime() {
     var date = new Date();
     var hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
     var am_pm = date.getHours() >= 12 ? "PM" : "AM";
@@ -323,13 +325,13 @@ function javascriptSux() {
     var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
     fucko = hours + ":" + minutes + ":" + seconds + " " + am_pm;
-    time.innerHTML = fucko;    
+    time.innerHTML = fucko;
     // time.innerHTML = new Date();    
 }
 
 /*
-update the time every second
-*/ 
-function t() {
-    window.setInterval(javascriptSux, 1000);
+ update the time every second
+ */
+function invokeTime() {
+    window.setInterval(updateTime, 1000);
 }
