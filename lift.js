@@ -17,6 +17,7 @@
 
 
 
+
 var CURRENT_PAGE_MONDEY_DATE = new Date();
 var UofSTimeTable = (function () {
 
