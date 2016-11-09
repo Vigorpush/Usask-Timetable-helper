@@ -259,18 +259,6 @@ function rid_number() {
         //alert($(HithereElement));
         $(monthDate).remove();
     }
-
-
-//
-//    var weekOf = date - i;
-//
-//    var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
-//
-//    //Changes "Week of Sep 26, 2016" to "Week # September 26, 2016"
-//    document.querySelector(".fieldlargetext").innerHTML =
-//        ('Week 4 ' + monthNames[monthIndex] + ' ' + weekOf + ', ' + year);
-
-
 }
 
 function DatePick() {
