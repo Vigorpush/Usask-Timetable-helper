@@ -133,10 +133,8 @@ $(document).ready(function () {
     replace_title();
     rid_number();
 
+    $(".pageheaderdiv1 > h1").remove();
 
-    $("input[name='goto_date_in']").focus(function () {
-        HS_setDate(this);
-    });
 });
 
 
@@ -255,6 +253,28 @@ function rid_number() {
         var html_String = month + "&nbsp;" + today.getDate();
         $(this).html("&nbsp;&nbsp;&nbsp;" + html_String);
     });
+
+    //alert();
+    if ($.trim($(monthDate).text()) == "No courses with assigned times this week.") {
+        //alert($(HithereElement));
+        $(monthDate).remove();
+    }
+
+
+//
+//    var weekOf = date - i;
+//
+//    var nextWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+//
+//    //Changes "Week of Sep 26, 2016" to "Week # September 26, 2016"
+//    document.querySelector(".fieldlargetext").innerHTML =
+//        ('Week 4 ' + monthNames[monthIndex] + ' ' + weekOf + ', ' + year);
+
+
+}
+
+function DatePick() {
+
 }
 
 
