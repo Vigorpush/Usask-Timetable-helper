@@ -7,19 +7,20 @@
 // @match		https://pawnss.usask.ca/ban/*
 // @require		https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require		https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+// @require     https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
+// @require     https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
 // @require		http://www.eyecon.ro/datepicker/js/datepicker.js
 // @require 	http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
 // @resource	sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
 // @resource	bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 // @grant		GM_getResourceText
 // @grant		GM_addStyle
-// ==/UserScript==  January 2
+// ==/UserScript==
 
 
-
-
-var CURRENT_PAGE_MONDEY_DATE = new Date();
 var UofSTimeTable = (function () {
+
+    var TIMETABLE = $('table.datadisplaytable');
 
     /**
      * A cell object
@@ -40,7 +41,15 @@ var UofSTimeTable = (function () {
         GM_addStyle(style);
     }
 
+    function current_page_date(){
+        var regular_date = /(\w+ \d+.*)/;
+        var match =  regular_date.exec($(".fieldlargetext").text());
+        UofSTimeTable.CURRENT_PAGE_MONDAY_DATE = new Date(match[1]);
+    }
+
     return {
+
+        CURRENT_PAGE_MONDAY_DATE:  new Date(),
 
         /**
          * Creating the share button
@@ -78,25 +87,25 @@ var UofSTimeTable = (function () {
             var font_color = params.font_color || 'white';
             var font_size = params.font_size || '1em';
             var days = params.days || [true];
-            
+
             var today = new Date();
-            var temp = new Date(CURRENT_PAGE_MONDEY_DATE);
+            var temp = new Date(this.CURRENT_PAGE_MONDAY_DATE);
             temp.setDate(temp.getDate() + today.getDay() - 1);
-            
+
 
             var d = new Date().getDay() - 1;
-            var timeTable = $('table.datadisplaytable')
-                .addClass("table table-striped table-bordered table-responsive table-condensed");
+            TIMETABLE.addClass("table table-striped table-bordered table-responsive table-condensed");
 
-                        if (today.getDate() != temp.getDate() || today.getMonth() != temp.getMonth()) {
+            if (today.getDate() != temp.getDate() || today.getMonth() != temp.getMonth()) {
                 return;
-                
             }
+
+
             var rowInfo = [new Cell(), new Cell(), new Cell(),
                 new Cell(), new Cell(), new Cell(), new Cell()
             ];
 
-            $(timeTable).find('tr').slice(1).each(function (_) {
+            TIMETABLE.find('tr').slice(1).each(function (_) {
                 var currRow = $(this);
                 $.each(rowInfo, function (key, cell) {
                     // height of zero means that the original row ends here and a new row starts
@@ -127,6 +136,7 @@ var UofSTimeTable = (function () {
             $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
             addStyleSheet('bootStrap');
             addStyleSheet('sweetAlert');
+            // $(document).ready(current_page_date);
             current_page_date();
             return this;
         }
@@ -135,8 +145,7 @@ var UofSTimeTable = (function () {
 })();
 
 $(document).ready(function () {
-    UofSTimeTable.init();
-    UofSTimeTable.highlightDays({
+    UofSTimeTable.init().highlightDays({
         cell_color: "#2fb673",
         font_color: "white",
         font_size: "1em"
@@ -147,19 +156,11 @@ $(document).ready(function () {
     navigation_term_to_one();
     replace_title();
     rid_number();
-    
+    // current_page_date();
+
     $(".pageheaderdiv1 > h1").remove();
 
 });
-
-function current_page_date(){
-var regular_date = /(\w+ \d+.*)/;
-var match =  regular_date.exec($(".fieldlargetext").text());
-CURRENT_PAGE_MONDEY_DATE = new Date(match[1]);
-
-//alert("CURRENT_PAGE_MONDEY_DATE" + CURRENT_PAGE_MONDEY_DATE);
-
-}
 
 
 /**
@@ -270,28 +271,20 @@ function rid_number() {
     var monthDate = weekDays.clone();
     weekDays.after(monthDate);
 
-    var today = CURRENT_PAGE_MONDEY_DATE;
-    //today.setDate(today.getDate() - today.getDay());
+    var today = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE;
 
     $(monthDate).children().slice(1).each(function (index) {
-       
+
         var month = monthNames[today.getMonth()];
         var html_String = month + "&nbsp;" + today.getDate();
         $(this).html("&nbsp;&nbsp;&nbsp;" + html_String);
-     today.setDate(today.getDate() + 1);
+        today.setDate(today.getDate() + 1);
     });
 
-    //alert();
     if ($.trim($(monthDate).text()) == "No courses with assigned times this week.") {
-        //alert($(HithereElement));
         $(monthDate).remove();
     }
 }
-
-function DatePick() {
-
-}
-
 
 /**
  * Function Share function Caller
