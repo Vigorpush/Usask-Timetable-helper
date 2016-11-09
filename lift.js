@@ -20,7 +20,7 @@
 
 var UofSTimeTable = (function () {
 
-    var TIMETABLE = $('table.datadisplaytable');
+    // var TIMETABLE = $('table.datadisplaytable');
 
     /**
      * A cell object
@@ -50,6 +50,8 @@ var UofSTimeTable = (function () {
     return {
 
         CURRENT_PAGE_MONDAY_DATE:  new Date(),
+
+        TIMETABLE: $('table.datadisplaytable'),
 
         /**
          * Creating the share button
@@ -94,7 +96,7 @@ var UofSTimeTable = (function () {
 
 
             var d = new Date().getDay() - 1;
-            TIMETABLE.addClass("table table-striped table-bordered table-responsive table-condensed");
+            this.TIMETABLE.addClass("table table-striped table-bordered table-responsive table-condensed");
 
             if (today.getDate() != temp.getDate() || today.getMonth() != temp.getMonth()) {
                 return;
@@ -105,7 +107,7 @@ var UofSTimeTable = (function () {
                 new Cell(), new Cell(), new Cell(), new Cell()
             ];
 
-            TIMETABLE.find('tr').slice(1).each(function (_) {
+            this.TIMETABLE.find('tr').slice(1).each(function (_) {
                 var currRow = $(this);
                 $.each(rowInfo, function (key, cell) {
                     // height of zero means that the original row ends here and a new row starts
@@ -156,7 +158,9 @@ $(document).ready(function () {
     navigation_term_to_one();
     replace_title();
     rid_number();
-    // current_page_date();
+    IamBeautiful();
+    makeTimeLabel();
+    t();
 
     $(".pageheaderdiv1 > h1").remove();
 
@@ -219,7 +223,7 @@ function TermSwitchToOneAction() {
 }
 
 /**
- * Replace the title with "Student schedule for 2016-2017 Term 1"
+ * Replace the title with "Student schedule for 2016-2017"
  * */
 function replace_title() {
     //TODO: Somehow obtain the current term and year. Right now it's just hard-coded.
@@ -232,20 +236,6 @@ function replace_title() {
     document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
     //Removes the useless information on the page that no one reads.
     document.querySelector(".pagebodydiv > div.infotextdiv").style.display = 'none';
-}
-
-
-/**
- * Highlight the current day
- * */
-function hightlight_current() {
-
-}
-/**
- * Large buttons for navigating the weeks. Kinda like the Google images page
- * */
-function navigating_weeks() {
-
 }
 
 /**
@@ -286,6 +276,22 @@ function rid_number() {
     }
 }
 
+//CSS on the two row headers: Days and the dates.
+function IamBeautiful() {
+
+    var timeTable = UofSTimeTable.TIMETABLE;
+
+    timeTable.find("tr:nth-child(1)").children().slice(1).css({
+        "font-size": "2em",
+        "text-align" : "center"
+    });
+
+    timeTable.find("tr:nth-child(2)").children().slice(1).css({
+        "font-size": "0.8em",
+        "text-align" : "center"
+    });
+}
+
 /**
  * Function Share function Caller
  */
@@ -298,4 +304,24 @@ function ShareAction() {
         type: "error",
         confirmButtonText: "Cool"
     });
+}
+
+var time = document.createElement('label'); //global var to update time
+/*
+make the actual time label
+*/
+function makeTimeLabel() {
+    time.innerHTML = new Date();    
+    document.getElementsByTagName('body')[0].appendChild(time);
+}
+
+function javascriptSux() {
+    time.innerHTML = new Date();    
+}
+
+/*
+update the time every second
+*/ 
+function t() {
+    window.setInterval(javascriptSux, 1000);
 }
