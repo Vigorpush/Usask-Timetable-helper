@@ -13,12 +13,8 @@
 // @resource	bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 // @grant		GM_getResourceText
 // @grant		GM_addStyle
-// ==/UserScript==  January 2
+// ==/UserScript==
 
-
-
-
-var CURRENT_PAGE_MONDEY_DATE = new Date();
 var UofSTimeTable = (function () {
 
     /**
@@ -78,20 +74,11 @@ var UofSTimeTable = (function () {
             var font_color = params.font_color || 'white';
             var font_size = params.font_size || '1em';
             var days = params.days || [true];
-            
-            var today = new Date();
-            var temp = new Date(CURRENT_PAGE_MONDEY_DATE);
-            temp.setDate(temp.getDate() + today.getDay() - 1);
-            
 
             var d = new Date().getDay() - 1;
             var timeTable = $('table.datadisplaytable')
                 .addClass("table table-striped table-bordered table-responsive table-condensed");
 
-                        if (today.getDate() != temp.getDate() || today.getMonth() != temp.getMonth()) {
-                return;
-                
-            }
             var rowInfo = [new Cell(), new Cell(), new Cell(),
                 new Cell(), new Cell(), new Cell(), new Cell()
             ];
@@ -127,7 +114,6 @@ var UofSTimeTable = (function () {
             $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
             addStyleSheet('bootStrap');
             addStyleSheet('sweetAlert');
-            current_page_date();
             return this;
         }
     };
@@ -135,8 +121,7 @@ var UofSTimeTable = (function () {
 })();
 
 $(document).ready(function () {
-    UofSTimeTable.init();
-    UofSTimeTable.highlightDays({
+    UofSTimeTable.init().highlightDays({
         cell_color: "#2fb673",
         font_color: "white",
         font_size: "1em"
@@ -147,21 +132,10 @@ $(document).ready(function () {
     navigation_term_to_one();
     replace_title();
     rid_number();
-    makeTimeLabel();
-    t();
-    
+
     $(".pageheaderdiv1 > h1").remove();
 
 });
-
-function current_page_date(){
-var regular_date = /(\w+ \d+.*)/;
-var match =  regular_date.exec($(".fieldlargetext").text());
-CURRENT_PAGE_MONDEY_DATE = new Date(match[1]);
-
-//alert("CURRENT_PAGE_MONDEY_DATE" + CURRENT_PAGE_MONDEY_DATE);
-
-}
 
 
 /**
@@ -220,7 +194,7 @@ function TermSwitchToOneAction() {
 }
 
 /**
- * Replace the title with "Student schedule for 2016-2017"
+ * Replace the title with "Student schedule for 2016-2017 Term 1"
  * */
 function replace_title() {
     //TODO: Somehow obtain the current term and year. Right now it's just hard-coded.
@@ -272,15 +246,14 @@ function rid_number() {
     var monthDate = weekDays.clone();
     weekDays.after(monthDate);
 
-    var today = CURRENT_PAGE_MONDEY_DATE;
-    //today.setDate(today.getDate() - today.getDay());
+    var today = new Date();
+    today.setDate(today.getDate() - today.getDay());
 
     $(monthDate).children().slice(1).each(function (index) {
-       
+        today.setDate(today.getDate() + 1);
         var month = monthNames[today.getMonth()];
         var html_String = month + "&nbsp;" + today.getDate();
         $(this).html("&nbsp;&nbsp;&nbsp;" + html_String);
-     today.setDate(today.getDate() + 1);
     });
 
     //alert();
@@ -307,24 +280,4 @@ function ShareAction() {
         type: "error",
         confirmButtonText: "Cool"
     });
-}
-
-var time = document.createElement('label'); //global var to update time
-/*
-make the actual time label
-*/
-function makeTimeLabel() {
-    time.innerHTML = new Date();    
-    document.getElementsByTagName('body')[0].appendChild(time);
-}
-
-function javascriptSux() {
-    time.innerHTML = new Date();    
-}
-
-/*
-update the time every second
-*/ 
-function t() {
-    window.setInterval(javascriptSux, 1000);
 }
