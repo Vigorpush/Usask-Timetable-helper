@@ -169,10 +169,11 @@ function navigation_term() {
     var input = document.createElement("div");
     input.id = "Term_button";
     input.onclick = TermSwitchAction;
+    input.innerHTML = input.innerHTML + '> >';
     document.body.appendChild(input);
 
     $("#Term_button").css({
-        'font-size': '1em',
+        'font-size': '2em',
         'position': 'absolute',
         'bottom': '420px',
         'right': '80px',
@@ -190,10 +191,11 @@ function navigation_term_to_one() {
     var input = document.createElement("div");
     input.id = "Term_button_to_one";
     input.onclick = TermSwitchToOneAction;
+    input.innerHTML = input.innerHTML + '< <';
     document.body.appendChild(input);
 
     $("#Term_button_to_one").css({
-        'font-size': '1em',
+        'font-size': '2em',
         'position': 'absolute',
         'bottom': '420px',
         'left': '20px',
@@ -224,7 +226,7 @@ function replace_title() {
     //Changes the title, "Student Schedule by Day and Time", to "Student Schedule for 2016 - 2017 Term 1".
     //In doing so, the information on the right, which includes the time, date and student's identity, is removed.
     //If we want to keep that information, we'll need to create a table.
-    document.querySelector(".pagetitlediv").innerHTML = "Student Schedule for 2016 - 2017 Term 1<br><br>";
+    document.querySelector(".pagetitlediv").innerHTML = "Student Schedule for 2016 - 2017<br><br>";
     document.querySelector(".pagetitlediv").style.color = '#39a3b1';
     document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
     //Removes the useless information on the page that no one reads.
