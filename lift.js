@@ -77,11 +77,20 @@ var UofSTimeTable = (function () {
             var font_color = params.font_color || 'white';
             var font_size = params.font_size || '1em';
             var days = params.days || [true];
+            
+            var today = new Date();
+            var temp = new Date(CURRENT_PAGE_MONDEY_DATE);
+            temp.setDate(temp.getDate() + today.getDay() - 1);
+            
 
             var d = new Date().getDay() - 1;
             var timeTable = $('table.datadisplaytable')
                 .addClass("table table-striped table-bordered table-responsive table-condensed");
 
+                        if (today.getDate() != temp.getDate() || today.getMonth() != temp.getMonth()) {
+                return;
+                
+            }
             var rowInfo = [new Cell(), new Cell(), new Cell(),
                 new Cell(), new Cell(), new Cell(), new Cell()
             ];
@@ -125,7 +134,8 @@ var UofSTimeTable = (function () {
 })();
 
 $(document).ready(function () {
-    UofSTimeTable.init().highlightDays({
+    UofSTimeTable.init();
+    UofSTimeTable.highlightDays({
         cell_color: "#2fb673",
         font_color: "white",
         font_size: "1em"
