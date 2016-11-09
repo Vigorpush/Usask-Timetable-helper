@@ -132,11 +132,9 @@ $(document).ready(function () {
     navigation_term_to_one();
     replace_title();
     rid_number();
+    
+    $(".pageheaderdiv1 > h1").remove();
 
-
-    $("input[name='goto_date_in']").focus(function () {
-        HS_setDate(this);
-    });
 });
 
 
@@ -264,7 +262,11 @@ function rid_number() {
         var html_String = month + "&nbsp;" + today.getDate();
         $(this).html("&nbsp;&nbsp;&nbsp;"+html_String);
     });
-
+    //alert();
+if($.trim($(HithereElement).text())=="No courses with assigned times this week."){
+    //alert($(HithereElement));
+    $(HithereElement).remove();
+}
     
  
     
