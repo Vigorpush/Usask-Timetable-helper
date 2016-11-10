@@ -323,11 +323,8 @@ function replace_title() {
     if ((month>=1) && (month<5)){
       term =  "Term 2";
     }
-    if ((month >=5) && (month< 7)){
-      term = "Summer Term 1";
-    } 
-    if ((month >=7) && (month< 9)){
-      term = "Summer Term 2";
+    if ((month >=5) && (month< 9)){
+      term = "Summer";
     } 
   
     if((month>=1) && (month<5) ){
@@ -416,9 +413,9 @@ function updateTime() {
     hours = hours < 10 ? "0" + hours : hours;
     var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-    TimeString = hours + ":" + minutes + ":" + seconds + " " + am_pm;
-    time.innerHTML = TimeString;
-    // time.innerHTML = new Date();    
+    //TimeString = hours + ":" + minutes + ":" + seconds + " " + am_pm;
+    //time.innerHTML = TimeString;
+     time.innerHTML = new Date();    
 }
 function invokeTime() {
     window.setInterval(updateTime, 1000); // update the time every second
