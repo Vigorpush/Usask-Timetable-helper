@@ -1,18 +1,18 @@
 // ==UserScript==
 // @name		UofS TimeTable Enhancer
-// @namespace	http://tampermonkey.net/
+// @namespace		http://tampermonkey.net/
 // @version		0.1
-// @description	A bit of Javascript for enhancing the LAF of the timetable page on the usask website
+// @description		A bit of Javascript for enhancing the LAF of the timetable page on the usask website
 // @author		Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
 // @match		https://pawnss.usask.ca/ban/*
 // @require		https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require		https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
-// @require     https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
-// @require     https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
+// @require     	https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
+// @require     	https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
 // @require		http://www.eyecon.ro/datepicker/js/datepicker.js
-// @require 	http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
-// @resource	sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
-// @resource	bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+// @require 		http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
+// @resource		sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
+// @resource		bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 // @grant		GM_getResourceText
 // @grant		GM_addStyle
 // ==/UserScript==
@@ -168,9 +168,9 @@ $(document).ready(function () {
 });
 
 //////////////////////////////////////////
-//										//
-//			Function Callees			//
-//										//
+//					//
+//	Function Callees		//
+//					//
 //////////////////////////////////////////
 
 /**
@@ -252,14 +252,14 @@ function TermSwitchToOneAction() {
  * Replace the title with "Student schedule for 2016-2017"
  * */
 function replace_title() {
-  	var CurrentYear =  UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000;
+    var CurrentYear =  UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000;
     var checkyear = CurrentYear;
-  	var month = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getMonth()+1;
-  	var term ;
+    var month = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getMonth()+1;
+    var term ;
     if((month >= 9) && (month<=12)){
       term = "Term 1";
     } 
-  	if ((month>=1) && (month<5)){
+    if ((month>=1) && (month<5)){
       term =  "Term 2";
     }
     if ((month >=5) && (month< 9)){
@@ -269,9 +269,7 @@ function replace_title() {
     if((month>=1) && (month<5) ){
       checkyear = CurrentYear - 1;
     }
-	//alert(checkyear);
-    //alert(CurrentYear);
-	document.querySelector(".pagetitlediv").innerHTML = "Student Schedule for "+ checkyear +" - "+(checkyear+1) +" " + term +"<br><br>";
+    document.querySelector(".pagetitlediv").innerHTML = "Student Schedule for "+ checkyear +" - "+(checkyear+1) +" " + term +"<br><br>";
     document.querySelector(".pagetitlediv").style.color = '#39a3b1';
     document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
     document.querySelector(".pagebodydiv > div.infotextdiv").style.display = 'none';//Removes the useless information on the page that no one reads.
