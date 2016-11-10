@@ -45,19 +45,7 @@ var UofSTimeTable = (function () {
         UofSTimeTable.CURRENT_PAGE_MONDAY_DATE = new Date(match[1]);
     }
 
-    function EnlargeTopRows() {
-        var timeTable = UofSTimeTable.TIMETABLE;
 
-        timeTable.find("tr:nth-child(1)").children().slice(1).css({
-            "font-size": "2em",
-            "text-align": "center"
-        });
-
-        timeTable.find("tr:nth-child(2)").children().slice(1).css({
-            "font-size": "0.8em",
-            "text-align": "center"
-        });
-    }
 
     return {
 
@@ -178,10 +166,27 @@ $(document).ready(function () {
     rid_number();
     makeTimeLabel();
     invokeTime();
-
+	EnlargeTopRows();
     $(".pageheaderdiv1 > h1").remove();
 
 });
+
+
+function EnlargeTopRows() {
+        var timeTable = UofSTimeTable.TIMETABLE;
+
+        timeTable.find("tr:nth-child(1)").children().slice(1).css({
+            "font-size": "1.2em",
+            "text-align": "center"
+        });
+	
+
+		timeTable.find("tr:nth-child(2)").children().slice(1).css({
+            "font-size": "0.8em",
+            "text-align": "center"
+        });
+		
+    }
 
 
 /**
@@ -232,11 +237,11 @@ function navigation_term_to_one() {
 }
 
 function TermSwitchAction() {
-    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/02/2017";
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/02/2017"; //Hard Coded
 }
 
 function TermSwitchToOneAction() {
-    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=09/05/2016";
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=09/05/2016"; //Hard Coded
 }
 
 /**
@@ -251,19 +256,13 @@ function replace_title() {
     document.querySelector(".pagetitlediv").innerHTML = "Student Schedule for 2016 - 2017<br><br>";
     document.querySelector(".pagetitlediv").style.color = '#39a3b1';
     document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
-    //Removes the useless information on the page that no one reads.
-    document.querySelector(".pagebodydiv > div.infotextdiv").style.display = 'none';
+    document.querySelector(".pagebodydiv > div.infotextdiv").style.display = 'none';//Removes the useless information on the page that no one reads.
 }
 
 /**
  * Get rid of the hideous number that shows the number of weeks you have been attending the UofS
  * */
 function rid_number() {
-    //TODO: Fix the Previous and Next Week links to correctly display the current week number and date.
-    //TODO: Somehow obtain the current week number. Right now it's just hard-coded, not what we want.
-
-    //Remove the useless information detailing the total number of weeks a student has been attending the U of S.
-    //document.querySelector(".fieldmediumtext").style.display = 'none';
 
     var monthNames = [
         "January", "February", "March", "April",
@@ -271,8 +270,7 @@ function rid_number() {
         "September", "October", "November", "December"
     ];
 
-    /* Hide the week info stuff */
-    $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(3)").hide();
+    $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(3)").hide();//Remove the useless information detailing the total number of weeks a student has been attending the U of S.
 
     var weekDays = $("body > div.pagebodydiv > table.datadisplaytable.table.table-striped.table-bordered.table-responsive.table-condensed > tbody > tr:nth-child(1)");
     var monthDate = weekDays.clone();
@@ -307,11 +305,12 @@ function ShareAction() {
     });
 }
 
-var time = document.createElement('label'); //global var to update time
+
 
 /*
  make the actual time label
  */
+var time = document.createElement('label'); //global var to update time
 function makeTimeLabel() {
     time.innerHTML = new Date();
     document.getElementsByTagName('body')[0].appendChild(time);
@@ -324,8 +323,8 @@ function updateTime() {
     hours = hours < 10 ? "0" + hours : hours;
     var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
     var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-    fucko = hours + ":" + minutes + ":" + seconds + " " + am_pm;
-    time.innerHTML = fucko;
+    TimeString = hours + ":" + minutes + ":" + seconds + " " + am_pm;
+    time.innerHTML = TimeString;
     // time.innerHTML = new Date();    
 }
 
