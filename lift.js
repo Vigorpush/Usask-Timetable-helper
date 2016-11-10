@@ -32,7 +32,7 @@ var UofSTimeTable = (function () {
     }
 
     /**
-     * adding style into head
+     * adding style sheets into head
      */
     function addStyleSheet(resName) {
         var style = GM_getResourceText(resName);
@@ -47,18 +47,15 @@ var UofSTimeTable = (function () {
 
 
 
+   /**
+    * This enlarges the search top rows of the timetable table
+    * @constructor
+    */
     return {
 
         CURRENT_PAGE_MONDAY_DATE: new Date(),
-
+      
         TIMETABLE: $('table.datadisplaytable'),
-
-
-        /**
-         * This enlarges the search top rows of the timetable table
-         * @constructor
-         */
-
 
         /**
          * Creating the share button
@@ -84,11 +81,10 @@ var UofSTimeTable = (function () {
                 'box-shadow': '0px 0px 20px 0px #000'
             });
 
-        },
+        },//End of Create button
 
         /**
-         * Function to highlight all the cells that correspond to the current
-         * day
+         * Function to highlight all the cells that correspond to the current day
          * @param params json object containing parameters for the state attributes of each cell
          */
         HighlightDays: function (params) {
@@ -139,7 +135,7 @@ var UofSTimeTable = (function () {
                     cell.height--;
                 });
             });
-        },
+        },//End of HighlightDays
 
         init: function () {
             $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
@@ -148,8 +144,8 @@ var UofSTimeTable = (function () {
             EnlargeTopRows();
             current_page_date();
             return this;
-        }
-    };
+        }//End of init function
+    };//End of return
 })();
 
 $(document).ready(function () {
@@ -166,12 +162,20 @@ $(document).ready(function () {
     rid_number();
     makeTimeLabel();
     invokeTime();
-	EnlargeTopRows();
+	EnlargeTopRows(); //always after ridnumber
     $(".pageheaderdiv1 > h1").remove();
 
 });
 
+//////////////////////////////////////////
+//										//
+//			Function Callees			//
+//										//
+//////////////////////////////////////////
 
+/**
+* Change the top two rows style in this table
+*/
 function EnlargeTopRows() {
         var timeTable = UofSTimeTable.TIMETABLE;
 
@@ -179,14 +183,12 @@ function EnlargeTopRows() {
             "font-size": "1.2em",
             "text-align": "center"
         });
-	
 
 		timeTable.find("tr:nth-child(2)").children().slice(1).css({
             "font-size": "0.8em",
             "text-align": "center"
         });
-		
-    }
+}
 
 
 /**
@@ -244,16 +246,32 @@ function TermSwitchToOneAction() {
     document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=09/05/2016"; //Hard Coded
 }
 
+
+
 /**
  * Replace the title with "Student schedule for 2016-2017"
  * */
 function replace_title() {
-    //TODO: Somehow obtain the current term and year. Right now it's just hard-coded.
-
-    //Changes the title, "Student Schedule by Day and Time", to "Student Schedule for 2016 - 2017 Term 1".
-    //In doing so, the information on the right, which includes the time, date and student's identity, is removed.
-    //If we want to keep that information, we'll need to create a table.
-    document.querySelector(".pagetitlediv").innerHTML = "Student Schedule for 2016 - 2017<br><br>";
+  	var CurrentYear =  UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000;
+    var checkyear = CurrentYear;
+  	var month = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getMonth()+1;
+  	var term ;
+    if((month >= 9) && (month<=12)){
+      term = "Term 1";
+    } 
+  	if ((month>=1) && (month<5)){
+      term =  "Term 2";
+    }
+    if ((month >=5) && (month< 9)){
+      term = "Summer";
+    } 
+  
+    if((month>=1) && (month<5) ){
+      checkyear = CurrentYear - 1;
+    }
+	//alert(checkyear);
+    //alert(CurrentYear);
+	document.querySelector(".pagetitlediv").innerHTML = "Student Schedule for "+ checkyear +" - "+(checkyear+1) +" " + term +"<br><br>";
     document.querySelector(".pagetitlediv").style.color = '#39a3b1';
     document.querySelector(".pagetitlediv").style.fontSize = 'x-large';
     document.querySelector(".pagebodydiv > div.infotextdiv").style.display = 'none';//Removes the useless information on the page that no one reads.
@@ -264,7 +282,6 @@ function replace_title() {
  * */
 function rid_number() {
 
-   
     var monthNames = [
         "January", "February", "March", "April",
         "May", "June", "July", "August",
@@ -293,6 +310,8 @@ function rid_number() {
     }
 }
 
+
+
 /**
  * Function Share function Caller
  */
@@ -300,6 +319,9 @@ function ShareAction() {
     //Edit some code into here, for sharing
     Comfirmation();//remove this line
 }
+//End of ShareAction
+
+
 
 
 /**
@@ -313,13 +335,13 @@ function Comfirmation(){
         confirmButtonText: "Cool"
     });
 }
+//End of Comfirmation 
 
 
-//Start of current time clock
-/*
- * Create a time label
- */
-var time = document.createElement('label'); //global var to update time
+/**
+* Shows realtime 
+*/
+var time = document.createElement('label'); //Create a time label
 function makeTimeLabel() {
     time.innerHTML = new Date();
     document.getElementsByTagName('body')[0].appendChild(time);
@@ -336,11 +358,7 @@ function updateTime() {
     time.innerHTML = TimeString;
     // time.innerHTML = new Date();    
 }
-
-/*
- update the time every second
- */
 function invokeTime() {
-    window.setInterval(updateTime, 1000);
+    window.setInterval(updateTime, 1000); // update the time every second
 }
 //End of current time clock
