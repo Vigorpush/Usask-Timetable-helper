@@ -1,18 +1,18 @@
 // ==UserScript==
 // @name		UofS TimeTable Enhancer
-// @namespace		http://tampermonkey.net/
+// @namespace	http://tampermonkey.net/
 // @version		0.1
-// @description		A bit of Javascript for enhancing the LAF of the timetable page on the usask website
+// @description	A bit of Javascript for enhancing the LAF of the timetable page on the usask website
 // @author		Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
 // @match		https://pawnss.usask.ca/ban/*
 // @require		https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require		https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
-// @require     	https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
-// @require     	https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
+// @require     https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
+// @require     https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
 // @require		http://www.eyecon.ro/datepicker/js/datepicker.js
-// @require 		http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
-// @resource		sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
-// @resource		bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+// @require 	http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
+// @resource	sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
+// @resource	bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 // @grant		GM_getResourceText
 // @grant		GM_addStyle
 // ==/UserScript==
@@ -156,8 +156,8 @@ $(document).ready(function () {
     });
 
     UofSTimeTable.CreateButton(); //need naming standard for vars
-    navigation_term();
-    navigation_term_to_one();
+    navigation_next_term();
+    navigation_prev_term();
     replace_title();
     rid_number();
     makeTimeLabel();
@@ -168,9 +168,9 @@ $(document).ready(function () {
 });
 
 //////////////////////////////////////////
-//					//
-//	Function Callees		//
-//					//
+//										//
+//		Function Callees				//
+//										//
 //////////////////////////////////////////
 
 /**
@@ -194,14 +194,14 @@ function EnlargeTopRows() {
 /**
  * Add button above the schedule to allow navigation between terms
  * */
-function navigation_term() {
+function navigation_next_term() {
     var input = document.createElement("div");
-    input.id = "Term_button";
-    input.onclick = TermSwitchAction;
+    input.id = "Next_Term_button";
+    input.onclick = SwitchNextTerm;
     input.innerHTML = input.innerHTML + '> >';
     document.body.appendChild(input);
 
-    $("#Term_button").css({
+    $("#Next_Term_button").css({
         'font-size': '2em',
         'position': 'absolute',
         'bottom': '420px',
@@ -216,14 +216,14 @@ function navigation_term() {
     });
 }
 
-function navigation_term_to_one() {
+function navigation_prev_term() {
     var input = document.createElement("div");
-    input.id = "Term_button_to_one";
-    input.onclick = TermSwitchToOneAction;
+    input.id = "Prev_Term_buttone";
+    input.onclick = SwitchPrevTerm;
     input.innerHTML = input.innerHTML + '< <';
     document.body.appendChild(input);
 
-    $("#Term_button_to_one").css({
+    $("#Prev_Term_buttone").css({
         'font-size': '2em',
         'position': 'absolute',
         'bottom': '420px',
@@ -238,12 +238,19 @@ function navigation_term_to_one() {
     });
 }
 
-function TermSwitchAction() {
-    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/02/2017"; //Hard Coded
+var maxYear = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 + 1;//globel var for next year value
+function SwitchNextTerm() {
+  var CurrentYear =  UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 + 1;
+  if(CurrentYear > maxYear){
+    alert("reached to max");
+    return;
+  }
+  document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/30/"+CurrentYear+""; //Hard Coded
 }
 
-function TermSwitchToOneAction() {
-    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=09/05/2016"; //Hard Coded
+function SwitchPrevTerm() {
+  var CurrentYear =  UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 - 1;
+  document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=09/29/"+CurrentYear +""; //Hard Coded
 }
 
 
