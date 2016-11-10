@@ -239,7 +239,6 @@ function navigation_prev_term() {
 }
 
 var maxYear = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 + 1;//globel var for next year value
-
 function SwitchNextTerm() {
   
   var CurrentYear =  UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 + 1;
@@ -272,7 +271,7 @@ function SwitchNextTerm() {
   }
   
   
-  document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/30/"+CurrentYear+""; //Hard Coded
+  document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/30/"+CurrentYear+""; 
 }
 
 function SwitchPrevTerm() {
@@ -305,7 +304,7 @@ function SwitchPrevTerm() {
     return;
   }
 
-  document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=07/30/"+CurrentYear +""; //Hard Coded
+  document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=07/30/"+CurrentYear +""; 
 }
 
 
