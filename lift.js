@@ -164,6 +164,7 @@ $(document).ready(function () {
     invokeTime();
 	EnlargeTopRows(); //always after ridnumber
   addhelpertext();
+  resetnextweekposition();
     $(".pageheaderdiv1 > h1").remove();
 
 });
@@ -400,6 +401,11 @@ function Comfirmation(){
 }
 //End of Comfirmation 
 
+
+
+/**
+* This function will add helper information about the search format
+*/
 function addhelpertext(){
 	var targetposition= $(".fieldlabeltext");
   	var designation = $("body > div.pagebodydiv > form > table > tbody > tr > td").append("<br><div ><p class ='helper'>Example for Feb 06, 2016 : 02/06/2016</p></div>");
@@ -410,6 +416,17 @@ function addhelpertext(){
       });
 }
 
+
+/**
+* This function will reset the position of next week button to the right
+*/
+function resetnextweekposition(){
+ var nextweek =  $(".rightaligntext");
+ $(".rightaligntext").css({
+			"float":"right",
+			"margin-right":"-62.3%"
+      });
+}
 
 /**
 * Shows realtime 
