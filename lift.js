@@ -239,18 +239,73 @@ function navigation_prev_term() {
 }
 
 var maxYear = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 + 1;//globel var for next year value
+
 function SwitchNextTerm() {
+  
   var CurrentYear =  UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 + 1;
   if(CurrentYear > maxYear){
-    alert("reached to max");
+    //alert("reached to max");
     return;
   }
+  
+  
+  var month = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getMonth() + 1;
+  if((month>=1) && (month<5)){
+    var currentsummerT1 = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000;
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=05/30/"+currentsummerT1+"";
+    //alert("move to summer term1!");
+    return;
+  }
+  
+  if((month>=5)&&(month<7)){
+    var currentsummerT2 = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000;
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=07/30/"+currentsummerT2+"";
+    //alert("move to summer term2!");
+    return;
+  }
+  
+  if((month>=7)&&(month<9)){
+    var currentregularT1 = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000;
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=09/30/"+currentregularT1+"";
+    //alert("move to regular term1!");
+    return;
+  }
+  
+  
   document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/30/"+CurrentYear+""; //Hard Coded
 }
 
 function SwitchPrevTerm() {
   var CurrentYear =  UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 - 1;
-  document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=09/29/"+CurrentYear +""; //Hard Coded
+  var month = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getMonth()+1;
+  if((month >= 9) && (month<=12)){
+      //alert("move to summer term!");
+  } 
+  
+   
+  var month = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getMonth() + 1;
+  if((month>=1) && (month<5)){
+    var currentsummerT1 = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 -1;
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=09/30/"+currentsummerT1+"";
+    //alert("move to regular term1!");
+    return;
+  }
+  
+  if((month>=5)&&(month<7)){
+    var currentsummerT2 = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000;
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=01/30/"+currentsummerT2+"";
+    //alert("move to regular term2!");
+    return;
+  }
+  
+  if((month>=7)&&(month<9)){
+    var currentregularT1 = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000;
+    document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=05/30/"+currentregularT1+"";
+    //alert("move to summar term1!");
+    return;
+  }
+
+  document.location.href = "https://pawnss.usask.ca/ban/bwskfshd.P_CrseSchd?start_date_in=07/30/"+CurrentYear +""; //Hard Coded
 }
 
 
