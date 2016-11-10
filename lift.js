@@ -323,8 +323,11 @@ function replace_title() {
     if ((month>=1) && (month<5)){
       term =  "Term 2";
     }
-    if ((month >=5) && (month< 9)){
-      term = "Summer";
+    if ((month >=5) && (month< 7)){
+      term = "Summer Term 1";
+    } 
+    if ((month >=7) && (month< 9)){
+      term = "Summer Term 2";
     } 
   
     if((month>=1) && (month<5) ){
