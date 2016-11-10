@@ -163,6 +163,7 @@ $(document).ready(function () {
     makeTimeLabel();
     invokeTime();
 	EnlargeTopRows(); //always after ridnumber
+  addhelpertext();
     $(".pageheaderdiv1 > h1").remove();
 
 });
@@ -398,6 +399,16 @@ function Comfirmation(){
     });
 }
 //End of Comfirmation 
+
+function addhelpertext(){
+	var targetposition= $(".fieldlabeltext");
+  	var designation = $("body > div.pagebodydiv > form > table > tbody > tr > td").append("<br><div ><p class ='helper'>Example for Feb 06, 2016 : 02/06/2016</p></div>");
+     $(".helper").css({
+          "font-size": "1em",
+          "color": "#545454"
+
+      });
+}
 
 
 /**
