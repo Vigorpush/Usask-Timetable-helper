@@ -264,29 +264,31 @@ function replace_title() {
  * */
 function rid_number() {
 
+   
     var monthNames = [
         "January", "February", "March", "April",
         "May", "June", "July", "August",
         "September", "October", "November", "December"
     ];
-
+    
+    
     $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(3)").hide();//Remove the useless information detailing the total number of weeks a student has been attending the U of S.
 
+    
     var weekDays = $("body > div.pagebodydiv > table.datadisplaytable.table.table-striped.table-bordered.table-responsive.table-condensed > tbody > tr:nth-child(1)");
     var monthDate = weekDays.clone();
-    weekDays.after(monthDate);
+    weekDays.after(monthDate);// clone a new row, and append after the first row
 
     var today = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE;
-
-    $(monthDate).children().slice(1).each(function (index) {
-
+    $(monthDate).children().slice(1).each(function (index) { // put the month and date into second row
         var month = monthNames[today.getMonth()];
         var html_String = month + "&nbsp;" + today.getDate();
         $(this).html("&nbsp;&nbsp;&nbsp;" + html_String);
         today.setDate(today.getDate() + 1);
     });
 
-    if ($.trim($(monthDate).text()) == "No courses with assigned times this week.") {
+    
+    if ($.trim($(monthDate).text()) == "No courses with assigned times this week.") { //compare the information shows that No courses .., then remove the additional row
         $(monthDate).remove();
     }
 }
@@ -295,8 +297,15 @@ function rid_number() {
  * Function Share function Caller
  */
 function ShareAction() {
-    //TODO
     //Edit some code into here, for sharing
+    Comfirmation();//remove this line
+}
+
+
+/**
+ * Show comfirmation information
+ */
+function Comfirmation(){
     swal({
         title: "Error!",
         text: "Here's my error message!",
@@ -306,9 +315,9 @@ function ShareAction() {
 }
 
 
-
+//Start of current time clock
 /*
- make the actual time label
+ * Create a time label
  */
 var time = document.createElement('label'); //global var to update time
 function makeTimeLabel() {
@@ -334,3 +343,4 @@ function updateTime() {
 function invokeTime() {
     window.setInterval(updateTime, 1000);
 }
+//End of current time clock
