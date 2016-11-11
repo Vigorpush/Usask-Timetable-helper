@@ -1,18 +1,18 @@
 // ==UserScript==
 // @name		UofS TimeTable Enhancer
-// @namespace	http://tampermonkey.net/
+// @namespace		http://tampermonkey.net/
 // @version		0.1
-// @description	A bit of Javascript for enhancing the LAF of the timetable page on the usask website
+// @description		A bit of Javascript for enhancing the LAF of the timetable page on the usask website
 // @author		Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
 // @match		https://pawnss.usask.ca/ban/*
 // @require		https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require		https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
-// @require     https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
-// @require     https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
+// @require     	https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
+// @require     	https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
 // @require		http://www.eyecon.ro/datepicker/js/datepicker.js
-// @require 	http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
-// @resource	sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
-// @resource	bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+// @require 		http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
+// @resource		sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
+// @resource		bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 // @grant		GM_getResourceText
 // @grant		GM_addStyle
 // ==/UserScript==
@@ -163,34 +163,55 @@ $(document).ready(function () {
     makeTimeLabel();
     invokeTime();
 	EnlargeTopRows(); //always after ridnumber
-  addhelpertext();
-  resetnextweekposition();
-  addednextterm();
-  addedprevterm();
-//navigation_next_term();
-  //  navigation_prev_term();
-    $(".pageheaderdiv1 > h1").remove();
+  	addhelpertext();
+  	resetnextweekposition();
+  	addednextterm();
+  	addedprevterm();
+
+    removeSpaceOnTop();
+  	NextTermListener();
+  	PrevTermListener();
   
+  
+
+
+});
+
+//////////////////////////////////////////
+//					//
+//		Function Callees	//
+//					//
+//////////////////////////////////////////
+
+
+/**
+* This function will add click listener to the next term button
+*/
+function NextTermListener(){
   $("#NexttermButton").on('click', function(){
-    SwitchNextTerm();
-});
+      SwitchNextTerm();
+  });
+}
 
-  
-    $("#PrevtermButton").on('click', function(){
-    SwitchNextTerm();
-});
+/**
+* This function will add click listener to the prev term button
+*/
+function PrevTermListener(){
+  $("#PrevtermButton").on('click', function(){
+    SwitchPrevTerm();
+  });
+}
 
-});
-
-//////////////////////////////////////////
-//										//
-//		Function Callees				//
-//										//
-//////////////////////////////////////////
+/**
+* This function will remove the empty space on the top
+*/
+function removeSpaceOnTop(){
+  $(".pageheaderdiv1 > h1").remove();
+}
 
 /**
 * Change the top two rows style in this table
-*/
+**/
 function EnlargeTopRows() {
         var timeTable = UofSTimeTable.TIMETABLE;
 
@@ -199,58 +220,14 @@ function EnlargeTopRows() {
             "text-align": "center"
         });
 
-		timeTable.find("tr:nth-child(2)").children().slice(1).css({
+	timeTable.find("tr:nth-child(2)").children().slice(1).css({
             "font-size": "0.8em",
             "text-align": "center"
         });
 }
 
 
-/**
- * Add button above the schedule to allow navigation between terms
- * */
-function navigation_next_term() {
-    var input = document.createElement("div");
-    input.id = "Next_Term_button";
-    input.onclick = SwitchNextTerm;
-    input.innerHTML = input.innerHTML + '> >';
-    document.body.appendChild(input);
-    $("#Next_Term_button").css({
-        'font-size': '2em',
-        'position': 'absolute',
-        'bottom': '420px',
-        'right': '80px',
-        'border-radius': '50%',
-        'overflow': 'hidden',
-        'width': '60px',
-        'height': '60px',
-        'border': '5px solid #00ffff',
-        'background': '#00ffff',
-        'box-shadow': '0px 0px 20px 0px #000'
-    });
-}
 
-function navigation_prev_term() {
-    var input = document.createElement("div");
-    input.id = "Prev_Term_button";
-    input.onclick = SwitchPrevTerm;
-    input.innerHTML = input.innerHTML + '< <';
-    document.body.appendChild(input);
-	
-    $("#Prev_Term_button").css({
-        'font-size': '2em',
-        'position': 'absolute',
-        'bottom': '420px',
-        'left': '20px',
-        'border-radius': '50%',
-        'overflow': 'hidden',
-        'width': '60px',
-        'height': '60px',
-        'border': '5px solid #00ffff',
-        'background': '#00ffff',
-        'box-shadow': '0px 0px 20px 0px #000'
-    });
-}
 
 var maxYear = UofSTimeTable.CURRENT_PAGE_MONDAY_DATE.getYear() - 100 + 2000 + 1;//globel var for next year value
 function SwitchNextTerm() {
@@ -419,13 +396,12 @@ function Comfirmation(){
 * This function will add helper information about the search format
 */
 function addhelpertext(){
-	var targetposition= $(".fieldlabeltext");
-  	var designation = $("body > div.pagebodydiv > form > table > tbody > tr > td ").append("<div ><p class ='helper'>Example for Feb 06, 2016 : 02/06/2016</p></div>");
-     $(".helper").css({
-       	  "margin-top":"0.5%",
+      var targetposition= $(".fieldlabeltext");
+      var designation = $("body > div.pagebodydiv > form > table > tbody > tr > td ").append("<div ><p class ='helper'>Example for Feb 06, 2016 : 02/06/2016</p></div>");
+      $(".helper").css({
+	  "margin-top":"0.5%",
           "font-size": "1em",
           "color": "#545454"
-
       });
 }
 
@@ -439,19 +415,27 @@ function resetnextweekposition(){
 			"margin-right":"-61.5%"
       });
 }
-
+/**
+ * This function will added next term button
+ */
 function addednextterm(){
     $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(5) > p").append("<div id='NexttermButton'  style = 'display:inline;'><a>Next term</a></div>");  
   	$("#NexttermButton").css({
        	  "margin-left":"0.5%",
       });
 }
+
+/**
+ * This function will added prev term button
+ */
 function addedprevterm(){
 	$("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(1)").prepend("<div id='PrevtermButton'  style = 'display:inline;'><a>Previous term</a></div>");
     	$("#PrevtermButton").css({
        	  "margin-right":"0.5%",
       });
 }
+
+
 /**
 * Shows realtime 
 */
