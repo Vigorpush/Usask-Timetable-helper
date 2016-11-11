@@ -149,15 +149,15 @@ var UofSTimeTable = (function () {
 })();
 
 $(document).ready(function () {
-    UofSTimeTable.init().HighlightDays({
+
+  UofSTimeTable.init().HighlightDays({
         cell_color: "#2fb673",
         font_color: "white",
         font_size: "1em"
     });
 
     UofSTimeTable.CreateButton(); //need naming standard for vars
-    navigation_next_term();
-    navigation_prev_term();
+    
     replace_title();
     rid_number();
     makeTimeLabel();
@@ -165,7 +165,20 @@ $(document).ready(function () {
 	EnlargeTopRows(); //always after ridnumber
   addhelpertext();
   resetnextweekposition();
+  addednextterm();
+  addedprevterm();
+//navigation_next_term();
+  //  navigation_prev_term();
     $(".pageheaderdiv1 > h1").remove();
+  
+  $("#NexttermButton").on('click', function(){
+    SwitchNextTerm();
+});
+
+  
+    $("#PrevtermButton").on('click', function(){
+    SwitchNextTerm();
+});
 
 });
 
@@ -202,7 +215,6 @@ function navigation_next_term() {
     input.onclick = SwitchNextTerm;
     input.innerHTML = input.innerHTML + '> >';
     document.body.appendChild(input);
-
     $("#Next_Term_button").css({
         'font-size': '2em',
         'position': 'absolute',
@@ -220,12 +232,12 @@ function navigation_next_term() {
 
 function navigation_prev_term() {
     var input = document.createElement("div");
-    input.id = "Prev_Term_buttone";
+    input.id = "Prev_Term_button";
     input.onclick = SwitchPrevTerm;
     input.innerHTML = input.innerHTML + '< <';
     document.body.appendChild(input);
-
-    $("#Prev_Term_buttone").css({
+	
+    $("#Prev_Term_button").css({
         'font-size': '2em',
         'position': 'absolute',
         'bottom': '420px',
@@ -408,8 +420,9 @@ function Comfirmation(){
 */
 function addhelpertext(){
 	var targetposition= $(".fieldlabeltext");
-  	var designation = $("body > div.pagebodydiv > form > table > tbody > tr > td").append("<br><div ><p class ='helper'>Example for Feb 06, 2016 : 02/06/2016</p></div>");
+  	var designation = $("body > div.pagebodydiv > form > table > tbody > tr > td ").append("<div ><p class ='helper'>Example for Feb 06, 2016 : 02/06/2016</p></div>");
      $(".helper").css({
+       	  "margin-top":"0.5%",
           "font-size": "1em",
           "color": "#545454"
 
@@ -422,12 +435,23 @@ function addhelpertext(){
 */
 function resetnextweekposition(){
  var nextweek =  $(".rightaligntext");
- $(".rightaligntext").css({
-			"float":"right",
-			"margin-right":"-62.3%"
+  	$(".rightaligntext").css({
+			"margin-right":"-61.5%"
       });
 }
 
+function addednextterm(){
+    $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(5) > p").append("<div id='NexttermButton'  style = 'display:inline;'><a>Next term</a></div>");  
+  	$("#NexttermButton").css({
+       	  "margin-left":"0.5%",
+      });
+}
+function addedprevterm(){
+	$("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(1)").prepend("<div id='PrevtermButton'  style = 'display:inline;'><a>Previous term</a></div>");
+    	$("#PrevtermButton").css({
+       	  "margin-right":"0.5%",
+      });
+}
 /**
 * Shows realtime 
 */
