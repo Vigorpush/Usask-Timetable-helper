@@ -12,6 +12,7 @@
 // @require		http://www.eyecon.ro/datepicker/js/datepicker.js
 // @require 		http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
 // @resource		sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
+// @resource		sharemenu https://gitlab.com/481-HCI/Scripts/raw/master/Sharemenu.css
 // @resource		bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 // @grant		GM_getResourceText
 // @grant		GM_addStyle
@@ -141,6 +142,7 @@ var UofSTimeTable = (function () {
             $(".ddlabel A").css({'color': '#39a3b1', 'font-size': '100%'});
             addStyleSheet('bootStrap');
             addStyleSheet('sweetAlert');
+            addStyleSheet('sharemenu');
             EnlargeTopRows();
             current_page_date();
             return this;
@@ -370,6 +372,67 @@ function rid_number() {
  */
 function ShareAction() {
     //Edit some code into here, for sharing
+    //
+    //
+    //
+ /*   
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+<div id="wrapper">
+	<h1>CSS3 Menu</h1>
+	<ul class="nav">
+		<li class="hm">
+			<img class="icon" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/home-24.png" alt="">
+			<span>Home</span>
+		</li>
+		<li class="fb">
+			<img class="icon" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/social-facebook-24.png" alt="">
+			<span>Facebook</span>
+		</li>
+		<li class="gp">
+			<img class="icon" src="https://cdn3.iconfinder.com/data/icons/picons-social/57/40-google-plus-24.png" alt="">
+			<span>Google-plus</span>
+		</li>
+		<li class="tw">
+			<img class="icon" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/social-twitter-24.png" alt="">
+			<span>Twitter</span>
+		</li>
+		<li class="cl">
+			<img class="icon" src="https://cdn0.iconfinder.com/data/icons/typicons-2/24/phone-24.png" alt="">
+			<span>Call</span>
+		</li>
+	</ul>
+</div>
+  */          
+    var content = "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>"
+                      + "<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>"
+                      + "<div id='wrapper' class= 'centered' style= 'width:768px;!important; height: 340px;!important; left: 23%;'>"
+                      	+ "<h1>Share Menu</h1>"
+                      	+ "<ul class='nav'>"
+                      		+ "<li class='hm'>"
+                      			+ "<img class='icon' src='https://cdn0.iconfinder.com/data/icons/typicons-2/24/home-24.png' alt=''>"
+                      			+"<span>Home</span>"
+                      		+ "</li>"
+                      		+ "<li class='fb'>"
+                      			+ "<img class='icon' src='https://cdn0.iconfinder.com/data/icons/typicons-2/24/social-facebook-24.png' alt=''>"
+                      			+ "<span>Facebook</span>"
+                      		+ "</li>"
+                      		+ "<li class='gp'>"
+										+ "<img class='icon' src='https://cdn3.iconfinder.com/data/icons/picons-social/57/40-google-plus-24.png' alt=''>"
+										+ "<span>Google-plus</span>"
+									+ "</li>"
+									+ "<li class='tw'>"
+										+ "<img class='icon' src='https://cdn0.iconfinder.com/data/icons/typicons-2/24/social-twitter-24.png' alt=''>"
+										+ "<span>Twitter</span>"
+									+ "</li>"
+									+ "<li class='cl'>"
+										+ "<img class='icon'' src='https://cdn0.iconfinder.com/data/icons/typicons-2/24/phone-24.png' alt=''>"
+										+ "<span>Call</span>"
+									+ "</li>"
+                      + "</ul>"
+                      + "</div>";
+    //alert(content);
+    $("body").append(content);
     Comfirmation();//remove this line
 }
 //End of ShareAction
@@ -444,11 +507,11 @@ function makeTimeLabel() {
     time.innerHTML = new Date();
     document.getElementsByTagName('body')[0].appendChild(time);
   	 $("body > label").css({
-        "position": "fixed",
-        "bottom": "0",
-        "left": "0",
-        "border": "2px solid #73AD21",
-        "background-color":"white"
+       	  "position": "fixed",
+    		"bottom": "0",
+    		"left": "0",
+      		"border": "2px solid #73AD21",
+      "background-color":"white"
       });
 }
 
