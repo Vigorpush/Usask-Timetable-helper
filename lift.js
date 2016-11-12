@@ -342,7 +342,7 @@ function rid_number() {
     ];
     
     
-    $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(3)").hide();//Remove the useless information detailing the total number of weeks a student has been attending the U of S.
+    $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(3)").remove();//Remove the useless information detailing the total number of weeks a student has been attending the U of S.
 
     
     var weekDays = $("body > div.pagebodydiv > table.datadisplaytable.table.table-striped.table-bordered.table-responsive.table-condensed > tbody > tr:nth-child(1)");
@@ -443,6 +443,13 @@ var time = document.createElement('label'); //Create a time label
 function makeTimeLabel() {
     time.innerHTML = new Date();
     document.getElementsByTagName('body')[0].appendChild(time);
+  	 $("body > label").css({
+        "position": "fixed",
+        "bottom": "0",
+        "left": "0",
+        "border": "2px solid #73AD21",
+        "background-color":"white"
+      });
 }
 
 function updateTime() {
