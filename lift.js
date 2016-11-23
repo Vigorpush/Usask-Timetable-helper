@@ -482,7 +482,7 @@ function resetnextweekposition(){
  * This function will added next term button
  */
 function addednextterm(){
-    $("body > div.pagebodydiv > table:nth-child(3) > tbody > tr > td:nth-child(5) > p").append("<div id='NexttermButton'  style = 'display:inline;'><a>Next term</a></div>");  
+    $("td.pldefault:nth-child(4) > p:nth-child(1)").append("<div id='NexttermButton'  style = 'display:inline;'><a>Next term</a></div>");  
   	$("#NexttermButton").css({
        	  "margin-left":"0.5%",
       });
