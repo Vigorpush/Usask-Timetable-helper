@@ -173,10 +173,18 @@ $(document).ready(function () {
     removeSpaceOnTop();
   	NextTermListener();
   	PrevTermListener();
-  
-  
 
+});
 
+var KEYCODE_ENTER = 13;
+var KEYCODE_ESC = 27;
+
+$(document).keyup(function(e) {
+  if (e.keyCode == KEYCODE_ESC) {
+    if($('.sharewindows').length>0){
+      $('.sharewindows').remove();
+    }
+  }
 });
 
 //////////////////////////////////////////
@@ -404,7 +412,7 @@ function ShareAction() {
 	</ul>
 </div>
   */          
-    var content = "<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>"
+    var content = "<div class='sharewindows'><div class='sharewindows'><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>"
                       + "<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>"
                       + "<div id='wrapper' class= 'centered' style= 'width:768px;!important; height: 340px;!important; left: 23%;'>"
                       	+ "<h1>Share Menu</h1>"
@@ -430,10 +438,10 @@ function ShareAction() {
 										+ "<span>Call</span>"
 									+ "</li>"
                       + "</ul>"
-                      + "</div>";
+                      + "</div></div>";
     //alert(content);
     $("body").append(content);
-    Comfirmation();//remove this line
+    //Comfirmation();//remove this line
 }
 //End of ShareAction
 
