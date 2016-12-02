@@ -1,21 +1,21 @@
 // ==UserScript==
-// @name		UofS TimeTable Enhancer
-// @namespace		http://tampermonkey.net/
-// @version		0.1
-// @description		A bit of Javascript for enhancing the LAF of the timetable page on the usask website
-// @author		Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
-// @match		https://pawnss.usask.ca/ban/*
-// @require		https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
-// @require		https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
-// @require     	https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
-// @require     	https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
-// @require		http://www.eyecon.ro/datepicker/js/datepicker.js
-// @require 		http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
-// @resource		sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
-// @resource		sharemenu https://gitlab.com/481-HCI/Scripts/raw/master/Sharemenu.css
-// @resource		bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
-// @grant		GM_getResourceText
-// @grant		GM_addStyle
+// @name        UofS TimeTable Enhancer
+// @namespace       http://tampermonkey.net/
+// @version     0.1
+// @description     A bit of Javascript for enhancing the LAF of the timetable page on the usask website
+// @author      Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
+// @match       https://pawnss.usask.ca/ban/*
+// @require     https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
+// @require     https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+// @require         https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
+// @require         https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
+// @require     http://www.eyecon.ro/datepicker/js/datepicker.js
+// @require         http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
+// @resource        sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
+// @resource        sharemenu https://gitlab.com/481-HCI/Scripts/raw/master/Sharemenu.css
+// @resource        bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+// @grant       GM_getResourceText
+// @grant       GM_addStyle
 // ==/UserScript==
 
 
@@ -28,7 +28,7 @@ var UofSTimeTable = (function () {
     shareMenuString += "        type=\"text\/css\">";
     shareMenuString += "        <link href=\"http:\/\/fonts.googleapis.com\/css?family=Roboto+Condensed:400,700\" rel=\"stylesheet\"";
     shareMenuString += "        type=\"text\/css\">";
-    shareMenuString += "        <div id=\"wrapper\" class=\"centered\" style=\"width:768px;!important; height: 340px;!important; left: 23%;\">";
+    shareMenuString += "        <div id=\"wrapper\" class=\"centered\" style=\"height: 340px;!important\">";
     shareMenuString += "            <h1>Share Menu<\/h1>";
     shareMenuString += "            <ul class=\"nav\">";
     shareMenuString += "                <li class=\"hm\"><img class=\"icon\" src=\"https:\/\/cdn0.iconfinder.com\/data\/icons\/typicons-2\/24\/home-24.png\"";
@@ -43,18 +43,14 @@ var UofSTimeTable = (function () {
     shareMenuString += "                <li class=\"tw\"><img class=\"icon\" src=\"https:\/\/cdn0.iconfinder.com\/data\/icons\/typicons-2\/24\/social-twitter-24.png\"";
     shareMenuString += "                    alt=\"\"><span>Twitter<\/span>";
     shareMenuString += "                <\/li>";
-    shareMenuString += "                <li class=\"cl\">";
-    shareMenuString += "                    <img class=\"icon\" '=\"\" src=\"https:\/\/cdn0.iconfinder.com\/data\/icons\/typicons-2\/24\/phone-24.png\" alt=\"\"><span>Call<\/span><\/li>";
+    // shareMenuString += "                <li class=\"cl\">";
+    // shareMenuString += "                    <img class=\"icon\" '=\"\" src=\"https:\/\/cdn0.iconfinder.com\/data\/icons\/typicons-2\/24\/phone-24.png\" alt=\"\"><span>Call<\/span><\/li>";
     shareMenuString += "            <\/ul>";
     shareMenuString += "        <\/div>";
     shareMenuString += "    <\/div>";
     shareMenuString += "<\/div>";
     shareMenuString += "";
 
-
-    function hideShareMenu() {
-
-    }
 
     /**
      * A cell object
@@ -127,8 +123,7 @@ var UofSTimeTable = (function () {
 
             $body.append($div, $shareMenuElement.hide())
                 .on('click', function (event) {
-                    console.log($(event.target));
-                    if (menuShowing) {
+                    if (menuShowing && !$.contains($shareMenuElement.get(0), $(event.target).get(0))) {
                         $shareMenuElement.hide();
                         menuShowing = false;
                     }
@@ -226,22 +221,10 @@ $(document).ready(function () {
     PrevTermListener();
 
 });
-
-var KEYCODE_ENTER = 13;
-var KEYCODE_ESC = 27;
-
-$(document).keyup(function (e) {
-    if (e.keyCode == KEYCODE_ESC) {
-        if ($('.sharewindows').length > 0) {
-            $('.sharewindows').remove();
-        }
-    }
-});
-
 //////////////////////////////////////////
-//					//
-//		Function Callees	//
-//					//
+//                  //
+//      Function Callees    //
+//                  //
 //////////////////////////////////////////
 
 
@@ -433,7 +416,7 @@ function Comfirmation() {
         confirmButtonText: "Cool"
     });
 }
-//End of Comfirmation 
+//End of Comfirmation
 
 
 /**
