@@ -8,7 +8,6 @@
 // @require         https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 // @require         https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
 // @require         https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
-// @require         https://github.com/niklasvh/html2canvas/blob/master/dist/html2canvas.js
 // @require         http://www.eyecon.ro/datepicker/js/datepicker.js
 // @require         http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
 // @resource        sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
@@ -20,6 +19,8 @@
 
 
 var UofSTimeTable = (function () {
+
+    var timeTableImage = null;
 
     var shareMenuString = "";
     shareMenuString += "<div class=\"sharewindows\">";
@@ -51,6 +52,26 @@ var UofSTimeTable = (function () {
     shareMenuString += "<\/div>";
     shareMenuString += "";
 
+    function dataURItoBlob(dataURI) {
+        var byteString = atob(dataURI.split(',')[1]);
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([ab], {type: 'image/png'});
+    }
+
+    (function () {
+        html2canvas($(".datadisplaytable").get(0), {
+            onrendered: function (canvas) {
+                var data = canvas.toDataURL("image/png");
+                timeTableImage = dataURItoBlob(data);
+            },
+            height: 400,
+            width: 600
+        });
+    })();
 
     /**
      * A cell object
@@ -78,22 +99,64 @@ var UofSTimeTable = (function () {
     }
 
     function addFBMetaData() {
-        $('head').append($("<meta>", {
-            property: "og:url",
-            content: "https://paws5.usask.ca/web/home-community#ssb-mycourses"
-        })).append($("<meta>", {
-            property: "og:type",
-            content: "profile"
-        })).append($("<meta>", {
-            property: "og:title",
-            content: "Student Schedule by Day and Time"
-        })).append($("<meta>", {
-            property: "og:description",
-            content: "Schedule for the week of "
-        })).append($("<meta>", {
-            property: "og:image",
-            content: "https://pawscas.usask.ca/uofs-theme/images/login-logo@2x.png"
-        }));
+        $.getScript('//connect.facebook.net/en_US/sdk.js', function () {
+            FB.init({
+                appId: "236016180144708",
+                cookie: true,
+                status: true,
+                version: 'v1.0', // or v2.1, v2.2, v2.3, ...
+                xfbml: false
+            });
+
+            $('.fb').click(function () {
+                var scheduleImage;
+                FB.ui({
+                        method: 'share_open_graph',
+                        action_type: 'og.shares',
+                        action_properties: JSON.stringify({
+                            object: {
+                                'og:url': "https://paws5.usask.ca/web/home-community#ssb-mycourses",
+                                "og:title": "Student Schedule by Day and Time",
+                                "og:description": "Schedule for the week of ",
+                                "og:site_name": "paws.usask.ca",
+                                "og:image": timeTableImage
+                            }
+                        })
+                    },
+                    function (resp) {
+                        if (resp && !resp.error_message) {
+                            // Good
+                        } else {
+                            swal({
+                                title: "Error",
+                                text: "An error occured when attempting to share to facebook",
+                                type: "error",
+                                timer: 2000
+                            });
+                        }
+                    });
+            });
+        });
+
+        // $('head').append($("<meta>", {
+        //     property: "og:url",
+        //     content: "https://paws5.usask.ca/web/home-community#ssb-mycourses"
+        // })).append($("<meta>", {
+        //     property: "og:type",
+        //     content: "profile"
+        // })).append($("<meta>", {
+        //     property: "og:title",
+        //     content: "Student Schedule by Day and Time"
+        // })).append($("<meta>", {
+        //     property: "og:description",
+        //     content: "Schedule for the week of "
+        // })).append($("<meta>", {
+        //     property: "og:image",
+        //     content: "https://pawscas.usask.ca/uofs-theme/images/login-logo@2x.png"
+        // })).append($("<meta>", {
+        //     property: "og:site_name",
+        //     content: "paws.usask.ca"
+        // }));
     }
 
     /**
@@ -427,7 +490,8 @@ function rid_number() {
     });
 
 
-    if ($.trim($(monthDate).text()) == "No courses with assigned times this week.") { //compare the information shows that No courses .., then remove the additional row
+    //compare the information shows that No courses .., then remove the additional row
+    if ($.trim($(monthDate).text()) == "No courses with assigned times this week.") {
         $(monthDate).remove();
     }
 }
