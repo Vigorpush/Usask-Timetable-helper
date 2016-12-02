@@ -1,21 +1,21 @@
 // ==UserScript==
-// @name        UofS TimeTable Enhancer
+// @name            UofS TimeTable Enhancer
 // @namespace       http://tampermonkey.net/
-// @version     0.1
+// @version         0.1
 // @description     A bit of Javascript for enhancing the LAF of the timetable page on the usask website
-// @author      Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
-// @match       https://pawnss.usask.ca/ban/*
-// @require     https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
-// @require     https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+// @author          Zang JiaWei, Nobleman Chukwu, Bengin Lee, Mark Nguyen
+// @match           https://pawnss.usask.ca/ban/*
+// @require         https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
+// @require         https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
 // @require         https://gitlab.com/481-HCI/Scripts/raw/master/html2canvas.js
-// @require         https://gitlab.com/481-HCI/Scripts/raw/master/jquery.plugin.html2canvas.js
-// @require     http://www.eyecon.ro/datepicker/js/datepicker.js
+// @require         https://github.com/niklasvh/html2canvas/blob/master/dist/html2canvas.js
+// @require         http://www.eyecon.ro/datepicker/js/datepicker.js
 // @require         http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js
 // @resource        sweetAlert http://t4t5.github.io/sweetalert/dist/sweetalert.css
 // @resource        sharemenu https://gitlab.com/481-HCI/Scripts/raw/master/Sharemenu.css
 // @resource        bootStrap https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
-// @grant       GM_getResourceText
-// @grant       GM_addStyle
+// @grant           GM_getResourceText
+// @grant           GM_addStyle
 // ==/UserScript==
 
 
@@ -75,6 +75,25 @@ var UofSTimeTable = (function () {
         var regular_date = /(\w+ \d+.*)/;
         var match = regular_date.exec($(".fieldlargetext").text());
         UofSTimeTable.CURRENT_PAGE_MONDAY_DATE = new Date(match[1]);
+    }
+
+    function addFBMetaData() {
+        $('head').append($("<meta>", {
+            property: "og:url",
+            content: "https://paws5.usask.ca/web/home-community#ssb-mycourses"
+        })).append($("<meta>", {
+            property: "og:type",
+            content: "profile"
+        })).append($("<meta>", {
+            property: "og:title",
+            content: "Student Schedule by Day and Time"
+        })).append($("<meta>", {
+            property: "og:description",
+            content: "Schedule for the week of "
+        })).append($("<meta>", {
+            property: "og:image",
+            content: "https://pawscas.usask.ca/uofs-theme/images/login-logo@2x.png"
+        }));
     }
 
     /**
@@ -191,6 +210,7 @@ var UofSTimeTable = (function () {
             addStyleSheet('sharemenu');
             EnlargeTopRows();
             current_page_date();
+            addFBMetaData();
             return this;
         }//End of init function
     };//End of return
@@ -219,6 +239,14 @@ $(document).ready(function () {
     removeSpaceOnTop();
     NextTermListener();
     PrevTermListener();
+
+    // $.ajaxSetup({ cache: true });
+    // $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+    //     FB.init({
+    //         appId: '{236016180144708}',
+    //         version: 'v2.7' // or v2.1, v2.2, v2.3, ...
+    //     });
+    // });
 
 });
 //////////////////////////////////////////
